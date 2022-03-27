@@ -12,20 +12,18 @@ sudo apt-get install -y nodejs
 
 mkdir -p ~/.local/bin
 mkdir -p ~/.local/share
+mkdir -p ~/config/nvim/UltiSnips
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim \
 ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-curl -L https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x86.zip |\
-unzip win32yank-x64.zip win32yank.exe -d ~/.local/bin/
-
-curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz |\
-gunzip -c - > ~/.local/bin/rust-analyzer
-
 ### lsp servers
+curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz |\
+       gunzip -c - > ~/.local/bin/rust-analyzer
 chmod +x ~/.local/bin/rust-analyzer
 sudo npm install -g pyright
 
-
-
+### win32yank in wsl
+curl -L https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x86.zip |\
+ unzip win32yank-x64.zip win32yank.exe -d ~/.local/bin/
 ```

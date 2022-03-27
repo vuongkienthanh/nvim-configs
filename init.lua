@@ -35,7 +35,6 @@ require('plugins')
 require('my_remap')
 
 -- for wsl clipboard
--- Download from https://github.com/equalsraf/win32yank
 if vim.fn.has('wsl') == 1 then
   vim.g.clipboard = {
     name = "win32yank-wsl",

@@ -2,7 +2,11 @@ vim.g.mapleader = ','
 local map = vim.api.nvim_set_keymap
 local opts = { noremap=true, silent=true }
 
-local servers = { 'pyright', 'rust_analyzer'}
+local servers = {
+  'pyright',
+  'rust_analyzer',
+  'svelte'
+}
 
 map('n', '<F2>', ':NvimTreeToggle<CR>', opts)
 
@@ -114,6 +118,7 @@ map('v', '<C-Y>', '"+y', opts)
 -- Undo break point
 map('i', ',', ',<C-G>u', opts)
 map('i', ';', ';<C-G>u', opts)
+map('i', ':', ':<C-G>u', opts)
 map('i', '.', '.<C-G>u', opts)
 map('i', '!', '!<C-G>u', opts)
 map('i', '?', '?<C-G>u', opts)
