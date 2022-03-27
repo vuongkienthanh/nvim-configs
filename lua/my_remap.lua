@@ -44,6 +44,7 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'ultisnips' },
     { name = 'buffer' },
+    { name = 'path' },
   },
   snippet = {
     expand = function(args)
@@ -108,7 +109,6 @@ map('v', '>', '>gv', opts)
 map('n', 'zz', 'zzzH', opts)
 map('n', '<C-L>', ':<C-U>nohls<CR><C-L>', opts)
 map('n', 'J', 'mxJ`x', opts)
-map('i', '<C-J>', '<ESC>', opts)
 -- copy visual selected to clipboard
 map('v', '<C-Y>', '"+y', opts)
 -- Undo break point

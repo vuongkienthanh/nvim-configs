@@ -28,10 +28,10 @@ set.shiftwidth=2
 set.autoindent = true
 set.smartindent = true
 
--- $HOME/.config/nvim/lua/plugins.lua
+-- ./lua/plugins.lua
 require('plugins')
 
--- $HOME/.config/nvim/lua/my_remap.lua
+-- ./lua/my_remap.lua
 require('my_remap')
 
 -- for wsl clipboard
