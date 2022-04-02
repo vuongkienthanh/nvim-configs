@@ -49,6 +49,7 @@ cmp.setup {
     { name = 'ultisnips' },
     { name = 'buffer' },
     { name = 'path' },
+    { name = 'nvim_lsp_signature_help'},
   },
   snippet = {
     expand = function(args)
@@ -90,7 +91,7 @@ cmp.setup {
 
 
 -- quickfix
-map('n', '<F3>', ':ccl<CR>:lcl<CR>', opts)
+map('n', '<leader>l', ':ccl<CR>:lcl<CR>', opts)
 map('n', ']q', ':cnext<CR>zzzv', opts)
 map('n', '[q', ':cprev<CR>zzzv', opts)
 -- buffers
@@ -123,3 +124,6 @@ map('i', '.', '.<C-G>u', opts)
 map('i', '!', '!<C-G>u', opts)
 map('i', '?', '?<C-G>u', opts)
 map('i', '<CR>', '<CR><C-G>u', opts)
+-- add char at the end
+map('n', ';;', 'mxA;<ESC>`x', opts)
+map('n', ',,', 'mxA,<ESC>`x', opts)

@@ -2,6 +2,8 @@ require('packer').startup(function()
   use {'wbthomason/packer.nvim'}
   use {'kyazdani42/nvim-web-devicons'}
   use {'tpope/vim-surround'}
+  use {'lukas-reineke/indent-blankline.nvim',
+    config = function() require'indent_blankline'.setup() end}
   use {'numToStr/Comment.nvim',
     config = function() require'Comment'.setup() end }
   use {'nvim-lualine/lualine.nvim',
@@ -24,6 +26,7 @@ require('packer').startup(function()
     requires = {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
       'hrsh7th/cmp-path',
       'quangnguyen30192/cmp-nvim-ultisnips',
       'SirVer/ultisnips',
@@ -53,5 +56,14 @@ require('packer').startup(function()
       autotag = {enable = true},
       context_commentstring = {enable = true},
       matchup = {enable = true},
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = "gnn",
+          node_incremental = "grn",
+          scope_incremental = "grc",
+          node_decremental = "grm",
+        },
+      },
     } end }
 end)
