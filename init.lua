@@ -21,6 +21,7 @@ set.list = true
 set.listchars:append("eol:↴")
 set.listchars:append("lead: ")
 set.listchars:append("multispace:…")
+set.listchars:append("tab:>~")
 -- tab
 set.expandtab = true
 set.tabstop=2

@@ -1,9 +1,29 @@
 snippet fn "generic function"
 fn ${1:name}(${2:args}) -> ${3:return_type} {
-    ${0:body}
+	${0:body}
 }
 endsnippet
 
 snippet "(?i)strfr" "String::from" r
 String::from("${0}")
+endsnippet
+
+snippet cfgtest "test module" b
+#[cfg(test)]
+mod tests {
+	use super::*;
+
+	${0}
+}
+endsnippet
+
+snippet testfn "test function"
+#[test]
+fn ${1: name}() {
+	${0: body}
+}
+endsnippet
+
+snippet ustd "use std" b
+use std::${0}
 endsnippet

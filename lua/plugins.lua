@@ -26,7 +26,6 @@ require('packer').startup(function()
     requires = {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
       'hrsh7th/cmp-path',
       'quangnguyen30192/cmp-nvim-ultisnips',
       'SirVer/ultisnips',
