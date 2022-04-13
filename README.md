@@ -4,7 +4,7 @@ Install script
 ```sh
 sudo apt update
 sudo apt upgrade
-sudo apt install python3-pip
+sudo apt install python3-pip libssl-dev
 sudo pip install pynvim
 
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
@@ -22,6 +22,7 @@ curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/
        gunzip -c - > ~/.local/bin/rust-analyzer
 chmod +x ~/.local/bin/rust-analyzer
 sudo npm install -g pyright
+cargo install --locked taplo-cli
 
 ### win32yank in wsl
 curl -L https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x86.zip |\
