@@ -5,7 +5,8 @@ local opts = { noremap=true, silent=true }
 local servers = {
   'pyright',
   'rust_analyzer',
-  'svelte'
+  'svelte',
+  'taplo',
 }
 
 map('n', '<F2>', ':NvimTreeToggle<CR>', opts)
