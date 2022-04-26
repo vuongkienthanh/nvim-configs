@@ -9,16 +9,9 @@ require('packer').startup(function()
   use {'nvim-lualine/lualine.nvim',
     config = function() require'lualine'.setup() end }
   use {'windwp/nvim-autopairs',
-    config = function()
-      local npairs = require('nvim-autopairs')
-      npairs.setup ({
-        check_ts=true,
-      })
-      local Rule = require'nvim-autopairs.rule'
-      npairs.add_rules({
-        Rule("<",">", "rust")
-      })
-    end }
+  config = function() require('nvim-autopairs').setup {
+    check_ts=true,
+  } end }
   use {'crusoexia/vim-monokai',
     config = function() vim.cmd('colorscheme monokai') end }
   use {"norcalli/nvim-colorizer.lua",
