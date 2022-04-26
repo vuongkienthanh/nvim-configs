@@ -7,6 +7,10 @@ local servers = {
   'rust_analyzer',
   'svelte',
   'taplo',
+  'jsonls',
+  'cssls',
+  'eslint',
+  'html',
 }
 
 map('n', '<F2>', ':NvimTreeToggle<CR>', opts)
@@ -101,9 +105,6 @@ map('n', '[b', ':bp<CR>', opts)
 -- tabs
 map('n', ']t', ':tabnext<CR>', opts)
 map('n', '[t', ':tabprev<CR>', opts)
--- add blank line
-map('n', ']<space>', 'mxo<ESC>0D`x', opts)
-map('n', '[<space>', 'mxO<ESC>0D`x', opts)
 -- move line
 map('v', '<C-j>', ":m '>+1<CR>gv=gv", opts)
 map('v', '<C-k>', ":m '<-2<CR>gv=gv", opts)
