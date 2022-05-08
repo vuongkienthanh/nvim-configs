@@ -19,6 +19,9 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim \
 
 ## lsp servers
 
+### SQL
+npm i -g sql-language-server
+
 ### Rust
 curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz |\
        gunzip -c - > ~/.local/bin/rust-analyzer

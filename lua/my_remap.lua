@@ -1,16 +1,18 @@
 vim.g.mapleader = ','
 local map = vim.api.nvim_set_keymap
-local opts = { noremap=true, silent=true }
+local opts = { noremap = true, silent = true }
 
 local servers = {
   'pyright',
-  'rust_analyzer',
+  -- 'rust_analyzer',
   'svelte',
   'taplo',
   'jsonls',
   'cssls',
   'eslint',
   'html',
+  'sumneko_lua',
+  'sqlls',
 }
 
 map('n', '<F2>', ':NvimTreeToggle<CR>', opts)
@@ -45,6 +47,14 @@ for _, lsp in pairs(servers) do
   }
 end
 
+local rust_opts = {
+  server = {
+    capabilities = capabilities,
+    on_attach = on_attach,
+  },
+}
+require('rust-tools').setup(rust_opts)
+
 local cmp = require("cmp")
 local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 
@@ -54,7 +64,7 @@ cmp.setup {
     { name = 'ultisnips' },
     { name = 'buffer' },
     { name = 'path' },
-    { name = 'nvim_lsp_signature_help'},
+    { name = 'nvim_lsp_signature_help' },
   },
   snippet = {
     expand = function(args)
@@ -88,8 +98,8 @@ cmp.setup {
   },
   formatting = {
     format = require('lspkind').cmp_format({
-      mode = 'symbol_text', 
-      maxwidth = 50, 
+      mode = 'symbol_text',
+      maxwidth = 50,
     })
   }
 }
