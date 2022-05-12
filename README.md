@@ -27,6 +27,17 @@ curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/
        gunzip -c - > ~/.local/bin/rust-analyzer
 chmod +x ~/.local/bin/rust-analyzer
 
+### Lua
+# clone project
+git clone --depth=1 https://github.com/sumneko/lua-language-server
+cd lua-language-server
+git submodule update --depth 1 --init --recursive
+./3rd/luamake/compile/install.sh
+./3rd/luamake/luamake rebuild
+cd ..
+mv lua-language-server ~/.local/bin/
+echo "$PATH=~/.local/bin/lua-language-server/bin" | tee -a ~/.profile
+
 ### Python
 sudo npm install -g pyright
 
