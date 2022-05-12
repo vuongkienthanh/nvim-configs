@@ -4,18 +4,34 @@ My neovim configs
 ## Install script
 
 ```sh
+## Prerequisites
+mkdir -p ~/.local/bin ~/.local/share ~/.build_from_source
+cd ~/.build_from_source
+
 sudo apt update
 sudo apt upgrade
-sudo apt install python3-pip libssl-dev
+sudo apt install python3-pip libssl-dev ninja-build \
+  gettext libtool libtool-bin autoconf automake \ 
+  cmake g++ pkg-config unzip curl doxygen
+
+## build neovim from source
+git clone https://github.com/neovim/neovim.git
+cd neovim
+make CMAKE_BUILD_TYPE=Release
+make install
 sudo pip install pynvim
 
+## nodejs LTS
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
-mkdir -p ~/.local/bin ~/.local/share
+## rust toolchains
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup default nightly
 
+## package manager for neovim
 git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-~/.local/share/nvim/site/pack/packer/start/packer.nvim
+  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 ## lsp servers
 
@@ -24,18 +40,17 @@ npm i -g sql-language-server
 
 ### Rust
 curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz |\
-       gunzip -c - > ~/.local/bin/rust-analyzer
+  gunzip -c - > ~/.local/bin/rust-analyzer
 chmod +x ~/.local/bin/rust-analyzer
 
 ### Lua
 # clone project
-git clone --depth=1 https://github.com/sumneko/lua-language-server
+git clone --depth=1 https://github.com/sumneko/lua-language-server \
+  ~/.local/bin/lua-language-server
 cd lua-language-server
 git submodule update --depth 1 --init --recursive
 ./3rd/luamake/compile/install.sh
 ./3rd/luamake/luamake rebuild
-cd ..
-mv lua-language-server ~/.local/bin/
 echo "$PATH=~/.local/bin/lua-language-server/bin" | tee -a ~/.profile
 
 ### Python
@@ -52,5 +67,5 @@ sudo npm i -g svelte-language-server
 
 ## win32yank in wsl
 curl -L https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x86.zip |\
- unzip win32yank-x64.zip win32yank.exe -d ~/.local/bin/
+  unzip win32yank-x64.zip win32yank.exe -d ~/.local/bin/
 ```
