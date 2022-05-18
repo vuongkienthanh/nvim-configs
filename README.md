@@ -44,13 +44,10 @@ curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/
 chmod +x ~/.local/bin/rust-analyzer
 
 ### Lua
-# clone project
-git clone --depth=1 https://github.com/sumneko/lua-language-server \
-  ~/.local/bin/lua-language-server
-cd lua-language-server
-git submodule update --depth 1 --init --recursive
-./3rd/luamake/compile/install.sh
-./3rd/luamake/luamake rebuild
+mkdir ~/.local/bin/lua-language-server/
+curl -L https://github.com/sumneko/lua-language-server/releases/download/3.2.3/lua-language-server-3.2.3-linux-x64.tar.gz |\
+  tar -C ~/.local/bin/lua-language-server/ -xzf
+# add to $PATH
 echo "$PATH=~/.local/bin/lua-language-server/bin" | tee -a ~/.profile
 
 ### Python
