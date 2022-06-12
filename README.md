@@ -52,6 +52,7 @@ echo "$PATH=~/.local/bin/lua-language-server/bin" | tee -a ~/.profile
 
 ### Python
 sudo npm install -g pyright
+pip install autopep8
 
 ### TOML
 cargo install --locked taplo-cli
