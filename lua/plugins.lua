@@ -70,7 +70,7 @@ require('packer').startup(function()
       }
     end }
   use { 'simrat39/rust-tools.nvim' }
-  use({
+  use {
     "jose-elias-alvarez/null-ls.nvim",
     config = function() require("null-ls").setup {
         sources = {
@@ -79,5 +79,9 @@ require('packer').startup(function()
       }
     end,
     requires = { "nvim-lua/plenary.nvim" },
-  })
+  }
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
 end)

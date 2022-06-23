@@ -1,10 +1,9 @@
-vim.g.mapleader = ','
+vim.g.mapleader = ' '
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 local servers = {
-  'pyright',
-  -- 'rust_analyzer',
+  'pyright', -- 'rust_analyzer',
   'svelte',
   'taplo',
   'jsonls',
@@ -15,12 +14,11 @@ local servers = {
   'sqlls',
 }
 
-map('n', '<F2>', ':NvimTreeToggle<CR>', opts)
-
-map('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-map('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+map('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+map('n', '<leader>l', ':ccl<CR>:lcl<CR>', opts)
 local on_attach = function(client, bufnr)
   local bmap = vim.api.nvim_buf_set_keymap
   bmap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -28,14 +26,14 @@ local on_attach = function(client, bufnr)
   bmap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   bmap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   bmap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  bmap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  bmap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  bmap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  bmap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  bmap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  bmap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  bmap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  bmap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  bmap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  bmap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  bmap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  bmap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   bmap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  bmap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.format{async=true}<CR>', opts)
+  bmap(bufnr, 'n', '<leader>f', '<cmd>lua vim.lsp.buf.format{async=true}<CR>', opts)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -105,16 +103,14 @@ cmp.setup {
 }
 
 
--- quickfix
-map('n', '<leader>l', ':ccl<CR>:lcl<CR>', opts)
-map('n', ']q', ':cnext<CR>zzzv', opts)
-map('n', '[q', ':cprev<CR>zzzv', opts)
--- buffers
-map('n', ']b', ':bn<CR>', opts)
-map('n', '[b', ':bp<CR>', opts)
--- tabs
-map('n', ']t', ':tabnext<CR>', opts)
-map('n', '[t', ':tabprev<CR>', opts)
+-- Nvim Tree
+map('n', '<leader><tab>', ':NvimTreeToggle<CR>', opts)
+-- Telescope
+map('n', '<leader>b', ':Telescope buffers<CR>', opts)
+map('n', '<leader>j', ':Telescope jumplist<CR>', opts)
+map('n', '<leader>o', ':Telescope builtin<CR>', opts)
+map('n', ']]', ':bnext<CR>', opts)
+map('n', '[[', ':bprev<CR>', opts)
 -- move line
 map('v', '<C-j>', ":m '>+1<CR>gv=gv", opts)
 map('v', '<C-k>', ":m '<-2<CR>gv=gv", opts)
@@ -128,6 +124,8 @@ map('n', '<C-L>', ':<C-U>nohls<CR><C-L>', opts)
 map('n', 'J', 'mxJ`x', opts)
 -- copy visual selected to clipboard
 map('v', '<C-Y>', '"+y', opts)
+-- paste last yanked
+map('n', '<C-P>', '"0p', opts)
 -- Undo break point
 map('i', ',', ',<C-G>u', opts)
 map('i', ';', ';<C-G>u', opts)
