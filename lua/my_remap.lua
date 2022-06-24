@@ -103,12 +103,10 @@ cmp.setup {
 }
 
 
--- Nvim Tree
-map('n', '<leader><tab>', ':NvimTreeToggle<CR>', opts)
--- Telescope
-map('n', '<leader>b', ':Telescope buffers<CR>', opts)
-map('n', '<leader>j', ':Telescope jumplist<CR>', opts)
-map('n', '<leader>o', ':Telescope builtin<CR>', opts)
+-- explorer
+map('n', '<leader><tab>', ':Neotree float toggle<CR>', opts)
+map('n', '<leader>`', ':Neotree buffers float toggle<CR>', opts)
+
 map('n', ']]', ':bnext<CR>', opts)
 map('n', '[[', ':bprev<CR>', opts)
 -- move line
@@ -137,3 +135,12 @@ map('i', '<CR>', '<CR><C-G>u', opts)
 -- add char at the end
 map('n', ';;', 'mxA;<ESC>`x', opts)
 map('n', ',,', 'mxA,<ESC>`x', opts)
+
+
+function _G.set_terminal_keymaps()
+  local opts = {noremap = true}
+  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
