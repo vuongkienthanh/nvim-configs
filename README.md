@@ -5,7 +5,7 @@ My neovim configs
 
 ```sh
 ## Prerequisites
-mkdir -p ~/.local/bin ~/.local/share ~/.build_from_source
+mkdir -p ~/.local/bin ~/.local/share ~/.build_from_source ~/.config/nvim
 cd ~/.build_from_source
 
 sudo apt update
@@ -67,3 +67,7 @@ sudo npm i --location=global svelte-language-server
 curl -L https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x86.zip |\
   unzip win32yank-x64.zip win32yank.exe -d ~/.local/bin/
 ```
+## Apply config
+git clone https://github.com/vuongkienthanh/nvim-configs.git ~/.config/nvim/
+## open nvim
+:PackerSync
