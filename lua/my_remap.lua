@@ -104,7 +104,7 @@ cmp.setup {
 
 
 -- explorer
-map('n', '<leader><tab>', ':Neotree float toggle<CR>', opts)
+map('n', '<leader><tab>', ':Neotree toggle<CR>', opts)
 map('n', '<leader>`', ':Neotree buffers float toggle<CR>', opts)
 
 map('n', ']]', ':bnext<CR>', opts)
