@@ -18,7 +18,7 @@ sudo apt install python3-pip libssl-dev ninja-build \
 git clone https://github.com/neovim/neovim.git
 cd neovim
 make CMAKE_BUILD_TYPE=Release
-make install
+sudo make install
 sudo pip install pynvim
 
 ## nodejs LTS
