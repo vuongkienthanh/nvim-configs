@@ -17,7 +17,7 @@ local servers = {
 map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-map('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+map('n', '<leader>q', '<cmd>lua vim.diagnostic.setqflist()<CR>', opts)
 map('n', '<leader>l', ':ccl<CR>:lcl<CR>', opts)
 local on_attach = function(client, bufnr)
   local bmap = vim.api.nvim_buf_set_keymap
@@ -105,7 +105,7 @@ cmp.setup {
 
 -- explorer
 map('n', '<leader><tab>', ':Neotree toggle<CR>', opts)
-map('n', '<leader>`', ':Neotree buffers float toggle<CR>', opts)
+map('n', '<leader>`', ':Neotree buffers toggle<CR>', opts)
 
 map('n', ']]', ':bnext<CR>', opts)
 map('n', '[[', ':bprev<CR>', opts)
