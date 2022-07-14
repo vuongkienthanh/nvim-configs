@@ -18,7 +18,6 @@ map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 map('n', '<leader>q', '<cmd>lua vim.diagnostic.setqflist({severity = {min=vim.diagnostic.severity.WARN}})<CR>', opts)
-map('n', '<leader>l', ':ccl<CR>:lcl<CR>', opts)
 local on_attach = function(client, bufnr)
   local bmap = vim.api.nvim_buf_set_keymap
   bmap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -29,6 +28,7 @@ local on_attach = function(client, bufnr)
   bmap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   bmap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   bmap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  bmap(bufnr, 'n', '<leader>ws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
   bmap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   bmap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   bmap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
@@ -106,6 +106,11 @@ cmp.setup {
 -- explorer
 map('n', '<leader><tab>', ':Neotree toggle<CR>', opts)
 map('n', '<leader>`', ':Neotree buffers toggle<CR>', opts)
+-- windows
+map('n', '<leader>j', '<C-W><C-j>', opts)
+map('n', '<leader>k', '<C-W><C-k>', opts)
+map('n', '<leader>h', '<C-W><C-h>', opts)
+map('n', '<leader>l', '<C-W><C-l>', opts)
 
 map('n', ']]', ':bnext<CR>', opts)
 map('n', '[[', ':bprev<CR>', opts)
@@ -118,7 +123,7 @@ map('n', 'N', 'Nzzzv', opts)
 map('v', '<', '<gv', opts)
 map('v', '>', '>gv', opts)
 map('n', 'zz', 'zzzH', opts)
-map('n', '<C-L>', ':<C-U>nohls<CR><C-L>', opts)
+map('n', '<C-l>', ':ccl<CR>:lcl<CR>:nohls<CR><C-l>', opts)
 map('n', 'J', 'mxJ`x', opts)
 -- copy visual selected to clipboard
 map('v', '<C-Y>', '"+y', opts)
@@ -138,7 +143,7 @@ map('n', ',,', 'mxA,<ESC>`x', opts)
 
 
 function _G.set_terminal_keymaps()
-  local opts = {noremap = true}
+  local opts = { noremap = true }
   vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
 end
 
