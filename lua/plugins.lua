@@ -1,8 +1,8 @@
 require('packer').init({
-    git = {
-      clone_timeout = false,
-    },
-  })
+  git = {
+    clone_timeout = false,
+  },
+})
 require('packer').startup(function()
   use { 'wbthomason/packer.nvim' }
   use { 'kyazdani42/nvim-web-devicons' }
@@ -11,8 +11,6 @@ require('packer').startup(function()
   use { 'crusoexia/vim-monokai',
     config = function() vim.cmd('colorscheme monokai') end
   }
-
-
   use { 'tpope/vim-surround' }
   use { 'lukas-reineke/indent-blankline.nvim',
     config = function() require 'indent_blankline'.setup() end }
@@ -47,8 +45,6 @@ require('packer').startup(function()
       }
     end
   }
-
-
   -- lsp
   use { 'neovim/nvim-lspconfig' }
   use { 'onsails/lspkind-nvim' }
@@ -79,8 +75,6 @@ require('packer').startup(function()
       }
     end,
   }
-
-
   -- treesitter
   use { 'nvim-treesitter/nvim-treesitter',
     requires = {
@@ -117,8 +111,6 @@ require('packer').startup(function()
         },
       }
     end }
-
-
   -- statusline
   use { 'nvim-lualine/lualine.nvim',
     config = function() require 'lualine'.setup {
@@ -128,4 +120,5 @@ require('packer').startup(function()
         }
       }
     end }
+  use { 'nvim-telescope/telescope.nvim'}
 end)

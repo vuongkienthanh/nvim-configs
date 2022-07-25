@@ -13,6 +13,7 @@ sudo apt upgrade
 sudo apt install python3-pip libssl-dev ninja-build \
   gettext libtool libtool-bin autoconf automake \
   cmake g++ pkg-config unzip curl doxygen xclip
+  fd-find
 
 ## build neovim from source
 git clone https://github.com/neovim/neovim.git
@@ -20,6 +21,10 @@ cd neovim
 make CMAKE_BUILD_TYPE=Release
 sudo make install
 pip install pynvim
+
+## rg
+curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+sudo dpkg -i ripgrep_13.0.0_amd64.deb
 
 ## nodejs LTS
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
