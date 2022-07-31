@@ -113,8 +113,8 @@ map('n', '<leader>l', '<C-W><C-l>', opts)
 map('n', ']]', ':bnext<CR>', opts)
 map('n', '[[', ':bprev<CR>', opts)
 -- move line
-map('v', '<C-j>', ":m '>+1<CR>gv=gv", opts)
-map('v', '<C-k>', ":m '<-2<CR>gv=gv", opts)
+map('v', '<C-j>', ":m '>+1<CR>gv", opts)
+map('v', '<C-k>', ":m '<-2<CR>gv", opts)
 -- better default keymaps
 map('n', 'n', 'nzzzv', opts)
 map('n', 'N', 'Nzzzv', opts)
