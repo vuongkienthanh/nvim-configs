@@ -12,7 +12,7 @@ sudo apt update
 sudo apt upgrade
 sudo apt install python3-pip libssl-dev ninja-build \
   gettext libtool libtool-bin autoconf automake \
-  cmake g++ pkg-config unzip curl doxygen xclip
+  cmake g++ pkg-config unzip curl doxygen xclip \
   fd-find
 
 ## build neovim from source
