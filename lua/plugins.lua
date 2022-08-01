@@ -95,6 +95,8 @@ require('packer').startup(function()
           "html",
           "css",
           "markdown",
+          "sql",
+          "toml",
         },
         highlight = { enable = true },
         autotag = { enable = true },
