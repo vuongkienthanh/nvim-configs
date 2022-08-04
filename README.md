@@ -53,7 +53,7 @@ mkdir ~/.local/bin/lua-language-server/
 curl -L https://github.com/sumneko/lua-language-server/releases/download/3.2.3/lua-language-server-3.2.3-linux-x64.tar.gz |\
   tar -C ~/.local/bin/lua-language-server/ -xzf -
 # add to $PATH
-echo "export PATH=$PATH:~/.local/bin/lua-language-server/bin" | tee -a ~/.profile
+echo "export PATH=\$PATH:~/.local/bin/lua-language-server/bin" | tee -a ~/.profile
 
 ### Python
 sudo npm install --location=global pyright
