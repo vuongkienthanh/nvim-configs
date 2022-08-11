@@ -60,7 +60,7 @@ sudo npm install --location=global pyright
 pip install autopep8
 
 ### TOML
-cargo install --locked taplo-cli
+cargo install --features lsp --locked taplo-cli
 
 ### JSON, CSS, HTML, Javascript/Typescript
 sudo npm i --location=global vscode-langservers-extracted
