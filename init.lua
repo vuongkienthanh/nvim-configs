@@ -29,7 +29,7 @@ set.shiftwidth=2
 set.autoindent = true
 set.smartindent = true
 
-vim.g.python3_host_prog = '/usr/bin/python3.8'
+vim.g.python3_host_prog = '/usr/bin/python'
 
 -- ./lua/plugins.lua
 require('plugins')
