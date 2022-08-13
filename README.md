@@ -26,9 +26,10 @@ pip install pynvim
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
 sudo dpkg -i ripgrep_13.0.0_amd64.deb
 
-## nodejs LTS
-curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-sudo apt-get install -y nodejs
+## node
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install node
+nvm use node
 
 ## rust toolchains
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -50,7 +51,7 @@ chmod +x ~/.local/bin/rust-analyzer
 
 ### Lua
 mkdir ~/.local/bin/lua-language-server/
-curl -L https://github.com/sumneko/lua-language-server/releases/download/3.2.3/lua-language-server-3.2.3-linux-x64.tar.gz |\
+curl -L https://github.com/sumneko/lua-language-server/releases/download/3.5.3/lua-language-server-3.5.3-linux-x64.tar.gz |\
   tar -C ~/.local/bin/lua-language-server/ -xzf -
 # add to $PATH
 echo "export PATH=\$PATH:~/.local/bin/lua-language-server/bin" | tee -a ~/.profile
