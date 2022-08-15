@@ -42,7 +42,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim \
 ## lsp servers
 
 ### SQL
-sudo npm i --location=global sql-language-server
+npm i --location=global sql-language-server
 
 ### Rust
 curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz |\
@@ -55,22 +55,23 @@ curl -L https://github.com/sumneko/lua-language-server/releases/download/3.5.3/l
   tar -C ~/.local/bin/lua-language-server/ -xzf -
 # add to $PATH
 echo "export PATH=\$PATH:~/.local/bin/lua-language-server/bin" | tee -a ~/.profile
+echo "export PATH=\$PATH:~/.local/bin/lua-language-server/bin" | tee -a ~/.bashrc
 
 ### Python
-sudo npm install --location=global pyright
+npm install --location=global pyright
 pip install autopep8
 
 ### TOML
 cargo install --features lsp --locked taplo-cli
 
 ### JSON, CSS, HTML, Javascript/Typescript
-sudo npm i --location=global vscode-langservers-extracted
+npm i --location=global vscode-langservers-extracted
 
 ### Svelte
-sudo npm i --location=global svelte-language-server
+npm i --location=global svelte-language-server
 
 ## win32yank in wsl
-curl -L https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x86.zip |\
+curl -LO https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip |\
   unzip win32yank-x64.zip win32yank.exe -d ~/.local/bin/
 ```
 ## Apply config
