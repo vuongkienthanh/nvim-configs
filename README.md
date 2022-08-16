@@ -59,7 +59,7 @@ echo "export PATH=\$PATH:~/.local/bin/lua-language-server/bin" | tee -a ~/.bashr
 
 ### Python
 npm install --location=global pyright
-pip install autopep8
+pip install black
 
 ### TOML
 cargo install --features lsp --locked taplo-cli
