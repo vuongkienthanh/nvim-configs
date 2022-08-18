@@ -8,9 +8,33 @@ require('packer').startup(function()
   use { 'kyazdani42/nvim-web-devicons' }
   use { 'nvim-lua/plenary.nvim' }
   use { 'MunifTanjim/nui.nvim' }
-  use { 'crusoexia/vim-monokai',
-    config = function() vim.cmd('colorscheme monokai') end
-  }
+  use { "catppuccin/nvim",
+    as = "catppuccin",
+    run = ":CatppuccinCompile",
+    config = function()
+      vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
+      require("catppuccin").setup {
+        compile = {
+          enabled = true
+        },
+        dim_inactive = {
+          enabled = true,
+          shade = "dark",
+          percentage = 0.15,
+        },
+        styles = {
+          comments = { "italic" },
+          conditionals = { "italic" },
+          loops = { "italic" },
+        },
+        nvimtree = { enabled = false },
+        neotree = { enabled = false },
+        indent_blankline = { enabled = false },
+        gitsigns = { enabled = false },
+      }
+      vim.cmd [[colorscheme catppuccin]]
+    end }
+
   use { 'tpope/vim-surround' }
   use { 'lukas-reineke/indent-blankline.nvim',
     config = function() require 'indent_blankline'.setup() end }
@@ -122,5 +146,17 @@ require('packer').startup(function()
         }
       }
     end }
-  use { 'nvim-telescope/telescope.nvim'}
+  use { 'nvim-telescope/telescope.nvim' }
 end)
+
+
+-- Create an autocmd User PackerCompileDone to update it every time packer is compiled
+vim.api.nvim_create_autocmd("User", {
+	pattern = "PackerCompileDone",
+	callback = function()
+		vim.cmd "CatppuccinCompile"
+		vim.defer_fn(function()
+			vim.cmd "colorscheme catppuccin"
+		end, 0) -- Defered for live reloading
+	end
+})
