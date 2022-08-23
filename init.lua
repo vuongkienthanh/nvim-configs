@@ -15,7 +15,6 @@ set.hidden = true
 set.cursorline = true
 set.shortmess:append('c')
 set.encoding='utf-8'
-set.colorcolumn = "80"
 set.termguicolors = true
 set.list = true
 set.listchars:append("eol:↴")
