@@ -16,6 +16,7 @@ local servers = {
 
 map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 map('n', '<leader>q', '<cmd>lua vim.diagnostic.setqflist({severity = {min=vim.diagnostic.severity.WARN}})<CR>', opts)
+map('n', '<leader>l', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 local on_attach = function(client, bufnr)
   local bmap = vim.api.nvim_buf_set_keymap
   bmap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
