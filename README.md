@@ -68,6 +68,8 @@ npm i --location=global svelte-language-server
 
 ### null-ls
 pip install black
+
+### others
 pip install sqlfluff
 
 ## win32yank in wsl
