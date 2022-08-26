@@ -41,9 +41,6 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim \
 
 ## lsp servers
 
-### SQL
-npm i --location=global sql-language-server
-
 ### Rust
 curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz |\
   gunzip -c - > ~/.local/bin/rust-analyzer
@@ -59,7 +56,6 @@ echo "export PATH=\$PATH:~/.local/bin/lua-language-server/bin" | tee -a ~/.bashr
 
 ### Python
 npm install --location=global pyright
-pip install black
 
 ### TOML
 cargo install --features lsp --locked taplo-cli
@@ -69,6 +65,10 @@ npm i --location=global vscode-langservers-extracted
 
 ### Svelte
 npm i --location=global svelte-language-server
+
+### null-ls
+pip install black
+pip install sqlfluff
 
 ## win32yank in wsl
 curl -LO https://github.com/equalsraf/win32yank/releases/download/v0.0.4/win32yank-x64.zip |\

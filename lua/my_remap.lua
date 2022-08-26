@@ -3,7 +3,8 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
 local servers = {
-  'pyright', -- 'rust_analyzer',
+  'pyright',
+  'rust_analyzer',
   'svelte',
   'taplo',
   'jsonls',
@@ -11,7 +12,6 @@ local servers = {
   'eslint',
   'html',
   'sumneko_lua',
-  'sqlls',
 }
 
 map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
@@ -104,7 +104,7 @@ cmp.setup {
 -- explorer
 map('n', '<leader><tab>', ':Neotree toggle<CR>', opts)
 map('n', '<leader>`', ':Neotree buffers toggle<CR>', opts)
-map('n', '<leader>s', ':Telescope live_grep<CR>',opts)
+map('n', '<leader>s', ':Telescope live_grep<CR>', opts)
 -- windows
 map('n', '<leader>j', '<C-W><C-j>', opts)
 map('n', '<leader>k', '<C-W><C-k>', opts)
