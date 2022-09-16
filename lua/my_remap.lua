@@ -110,9 +110,9 @@ map('n', '<leader>j', '<C-W><C-j>', opts)
 map('n', '<leader>k', '<C-W><C-k>', opts)
 map('n', '<leader>h', '<C-W><C-h>', opts)
 map('n', '<leader>l', '<C-W><C-l>', opts)
-
-map('n', ']]', ':bnext<CR>', opts)
-map('n', '[[', ':bprev<CR>', opts)
+-- color picker
+map('n', '<C-m>', ':CccPick<CR>', opts)
+map('i', '<C-m>', '<Plug>(ccc-insert)', opts)
 -- move line
 map('v', '<C-j>', ":m '>+1<CR>gv", opts)
 map('v', '<C-k>', ":m '<-2<CR>gv", opts)

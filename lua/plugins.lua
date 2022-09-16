@@ -1,13 +1,13 @@
-require('packer').init({
+require("packer").init({
   git = {
     clone_timeout = false,
   },
 })
-require('packer').startup(function()
-  use { 'wbthomason/packer.nvim' }
-  use { 'kyazdani42/nvim-web-devicons' }
-  use { 'nvim-lua/plenary.nvim' }
-  use { 'MunifTanjim/nui.nvim' }
+require("packer").startup(function()
+  use { "wbthomason/packer.nvim" }
+  use { "kyazdani42/nvim-web-devicons" }
+  use { "nvim-lua/plenary.nvim" }
+  use { "MunifTanjim/nui.nvim" }
   use { "catppuccin/nvim",
     as = "catppuccin",
     run = ":CatppuccinCompile",
@@ -34,24 +34,25 @@ require('packer').startup(function()
       }
       vim.cmd [[colorscheme catppuccin]]
     end }
-
-  use { 'tpope/vim-surround' }
-  use { 'lukas-reineke/indent-blankline.nvim',
-    config = function() require 'indent_blankline'.setup() end }
-  use { 'numToStr/Comment.nvim',
-    config = function() require 'Comment'.setup {
+  use { "kylechui/nvim-surround",
+    config = function() require("nvim-surround").setup() end }
+  use { "lukas-reineke/indent-blankline.nvim",
+    config = function() require "indent_blankline".setup() end }
+  use { "numToStr/Comment.nvim",
+    config = function() require "Comment".setup {
         mapping = {
           extra = false
         }
       }
     end }
-  use { 'windwp/nvim-autopairs',
-    config = function() require('nvim-autopairs').setup {
+  use { "windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {
         check_ts = true,
       }
     end }
   use { "norcalli/nvim-colorizer.lua",
-    config = function() require 'colorizer'.setup() end }
+    config = function() require "colorizer".setup() end }
+  use { "uga-rosa/ccc.nvim" }
   use { "akinsho/toggleterm.nvim",
     config = function() require("toggleterm").setup {
         open_mapping = [[<c-\>]],
@@ -70,25 +71,25 @@ require('packer').startup(function()
     end
   }
   -- lsp
-  use { 'neovim/nvim-lspconfig' }
-  use { 'onsails/lspkind-nvim' }
-  use { 'hrsh7th/nvim-cmp',
+  use { "neovim/nvim-lspconfig" }
+  use { "onsails/lspkind-nvim" }
+  use { "hrsh7th/nvim-cmp",
     requires = {
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-path',
-      'quangnguyen30192/cmp-nvim-ultisnips',
-      'SirVer/ultisnips',
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-path",
+      "quangnguyen30192/cmp-nvim-ultisnips",
+      "SirVer/ultisnips",
       config = function()
-        require('cmp').event:on(
-          'confirm_done',
-          require('nvim-autopairs.completion.cmp').on_confirm_done()
+        require("cmp").event:on(
+          "confirm_done",
+          require("nvim-autopairs.completion.cmp").on_confirm_done()
         )
-        vim.fn.system('mkdir', '-p', '~/.config/nvim/UltiSnips')
+        vim.fn.system("mkdir", "-p", "~/.config/nvim/UltiSnips")
       end
     } }
   use {
-    'simrat39/rust-tools.nvim',
+    "simrat39/rust-tools.nvim",
   }
   use {
     "jose-elias-alvarez/null-ls.nvim",
@@ -100,14 +101,14 @@ require('packer').startup(function()
     end,
   }
   -- treesitter
-  use { 'nvim-treesitter/nvim-treesitter',
+  use { "nvim-treesitter/nvim-treesitter",
     requires = {
       "windwp/nvim-ts-autotag",
       "JoosepAlviste/nvim-ts-context-commentstring",
       "andymass/vim-matchup",
     },
-    run = ':TSUpdate',
-    config = function() require 'nvim-treesitter.configs'.setup {
+    run = ":TSUpdate",
+    config = function() require "nvim-treesitter.configs".setup {
         ensure_installed = {
           "rust",
           "python",
@@ -138,15 +139,15 @@ require('packer').startup(function()
       }
     end }
   -- statusline
-  use { 'nvim-lualine/lualine.nvim',
-    config = function() require 'lualine'.setup {
+  use { "nvim-lualine/lualine.nvim",
+    config = function() require "lualine".setup {
         extensions = {
-          'toggleterm',
-          'neo-tree',
+          "toggleterm",
+          "neo-tree",
         }
       }
     end }
-  use { 'nvim-telescope/telescope.nvim' }
+  use { "nvim-telescope/telescope.nvim" }
 end)
 
 
