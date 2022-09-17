@@ -52,7 +52,26 @@ require("packer").startup(function()
     end }
   use { "norcalli/nvim-colorizer.lua",
     config = function() require "colorizer".setup() end }
-  use { "uga-rosa/ccc.nvim" }
+  use { "uga-rosa/ccc.nvim",
+    config = function()
+      local ccc = require("ccc")
+      ccc.setup({
+        inputs = {
+          ccc.inputs.rgb,
+        },
+        outputs = {
+          ccc.outputs.hex,
+          ccc.outputs.css_rgb,
+          {
+            name = "RGB args",
+            str = function(RGB)
+              return ("(%d, %d, %d)"):format(table.unpack(RGB))
+            end,
+          }
+        }
+      })
+    end
+  }
   use { "akinsho/toggleterm.nvim",
     config = function() require("toggleterm").setup {
         open_mapping = [[<c-\>]],
