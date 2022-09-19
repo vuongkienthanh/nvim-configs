@@ -57,11 +57,11 @@ require("packer").startup(function()
       local ccc = require("ccc")
       ccc.setup({
         inputs = {
-          ccc.inputs.rgb,
+          ccc.input.rgb,
         },
         outputs = {
-          ccc.outputs.hex,
-          ccc.outputs.css_rgb,
+          ccc.output.hex,
+          ccc.output.css_rgb,
           {
             name = "RGB args",
             str = function(RGB)
