@@ -78,7 +78,6 @@ require("packer").startup(function()
         direction = "horizontal",
       }
     end }
-
   -- explorer
   use { "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
@@ -168,7 +167,6 @@ require("packer").startup(function()
     end }
   use { "nvim-telescope/telescope.nvim" }
 end)
-
 
 -- Create an autocmd User PackerCompileDone to update it every time packer is compiled
 vim.api.nvim_create_autocmd("User", {
