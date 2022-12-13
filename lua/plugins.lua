@@ -1,38 +1,36 @@
-require("packer").init({
+require("packer").init {
   git = {
     clone_timeout = false,
   },
-})
+}
 require("packer").startup(function()
-  use { "wbthomason/packer.nvim" }
-  use { "kyazdani42/nvim-web-devicons" }
-  use { "nvim-lua/plenary.nvim" }
-  use { "MunifTanjim/nui.nvim" }
+  use {
+    "wbthomason/packer.nvim",
+    "kyazdani42/nvim-web-devicons",
+    "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
+  }
   use { "catppuccin/nvim",
     as = "catppuccin",
-    run = ":CatppuccinCompile",
     config = function()
-      vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
       require("catppuccin").setup {
-        compile = {
-          enabled = true
-        },
+        flavour = "mocha",
         dim_inactive = {
           enabled = true,
-          shade = "dark",
-          percentage = 0.15,
         },
         styles = {
           comments = { "italic" },
           conditionals = { "italic" },
           loops = { "italic" },
         },
-        nvimtree = { enabled = false },
-        neotree = { enabled = false },
-        indent_blankline = { enabled = false },
-        gitsigns = { enabled = false },
+        integrations = {
+          cmp = true,
+          native_lsp = { enabled = true },
+          indent_blankline = { enabled = true },
+          neotree = true,
+        },
       }
-      vim.cmd [[colorscheme catppuccin]]
+      vim.cmd.colorscheme "catppuccin"
     end }
   use { "kylechui/nvim-surround",
     config = function() require("nvim-surround").setup() end }
@@ -55,7 +53,7 @@ require("packer").startup(function()
   use { "uga-rosa/ccc.nvim",
     config = function()
       local ccc = require("ccc")
-      ccc.setup({
+      ccc.setup {
         inputs = {
           ccc.input.rgb,
         },
@@ -69,7 +67,7 @@ require("packer").startup(function()
             end,
           }
         }
-      })
+      }
     end
   }
   use { "akinsho/toggleterm.nvim",
@@ -83,14 +81,62 @@ require("packer").startup(function()
     branch = "v2.x",
     config = function()
       vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-      require("neo-tree").setup {
-        enable_git_status = false,
+      require("neo-tree").setup()
+    end
+  }
+
+  -- lsp
+  use {
+    "neovim/nvim-lspconfig",
+    requires = {
+      "onsails/lspkind-nvim",
+      "jose-elias-alvarez/null-ls.nvim",
+      "simrat39/rust-tools.nvim",
+    },
+    config = function()
+      local null_ls = require("null-ls")
+      null_ls.setup {
+        sources = {
+          null_ls.builtins.formatting.black,
+          null_ls.builtins.diagnostics.sqlfluff.with({
+            extra_args = { "--dialect", "sqlite" },
+          }),
+          null_ls.builtins.formatting.sqlfluff.with({
+            extra_args = { "--dialect", "sqlite" },
+          }),
+        },
       }
     end
   }
-  -- lsp
-  use { "neovim/nvim-lspconfig" }
-  use { "onsails/lspkind-nvim" }
+  use {
+    "williamboman/mason.nvim",
+    requires = {
+      "williamboman/mason-lspconfig.nvim",
+      "jayp0521/mason-null-ls.nvim",
+    },
+    config = function()
+      require("mason").setup()
+      require("mason-lspconfig").setup {
+        ensure_installed = {
+          "rust_analyzer",
+          "pyright",
+          "taplo",
+          "yamlls",
+          "sumneko_lua",
+          "html",
+          "cssls",
+          "eslint",
+          "tsserver",
+          "marksman"
+        },
+      }
+      require("mason-null-ls").setup {
+        ensure_installed = { "black", "sqlfluff" },
+        automatic_installation = false,
+        automatic_setup = false,
+      }
+    end
+  }
   use { "hrsh7th/nvim-cmp",
     requires = {
       "hrsh7th/cmp-buffer",
@@ -98,25 +144,13 @@ require("packer").startup(function()
       "hrsh7th/cmp-path",
       "quangnguyen30192/cmp-nvim-ultisnips",
       "SirVer/ultisnips",
-      config = function()
-        require("cmp").event:on(
-          "confirm_done",
-          require("nvim-autopairs.completion.cmp").on_confirm_done()
-        )
-        vim.fn.system("mkdir", "-p", "~/.config/nvim/UltiSnips")
-      end
-    } }
-  use {
-    "simrat39/rust-tools.nvim",
-  }
-  use {
-    "jose-elias-alvarez/null-ls.nvim",
-    config = function() require("null-ls").setup {
-        sources = {
-          require("null-ls").builtins.formatting.black,
-        },
-      }
-    end,
+    },
+    config = function()
+      require("cmp").event:on(
+        "confirm_done",
+        require("nvim-autopairs.completion.cmp").on_confirm_done()
+      )
+    end
   }
   -- treesitter
   use { "nvim-treesitter/nvim-treesitter",
@@ -140,8 +174,12 @@ require("packer").startup(function()
           "markdown",
           "sql",
           "toml",
+          "yaml",
         },
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
         autotag = { enable = true },
         context_commentstring = { enable = true },
         matchup = { enable = true },
@@ -162,19 +200,11 @@ require("packer").startup(function()
         extensions = {
           "toggleterm",
           "neo-tree",
+        },
+        options = {
+          theme = "catppuccin"
         }
       }
     end }
   use { "nvim-telescope/telescope.nvim" }
 end)
-
--- Create an autocmd User PackerCompileDone to update it every time packer is compiled
-vim.api.nvim_create_autocmd("User", {
-  pattern = "PackerCompileDone",
-  callback = function()
-    vim.cmd "CatppuccinCompile"
-    vim.defer_fn(function()
-      vim.cmd "colorscheme catppuccin"
-    end, 0) -- Defered for live reloading
-  end
-})
