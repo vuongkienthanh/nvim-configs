@@ -70,12 +70,6 @@ require("packer").startup(function()
       }
     end
   }
-  use { "akinsho/toggleterm.nvim",
-    config = function() require("toggleterm").setup {
-        open_mapping = [[<c-\>]],
-        direction = "horizontal",
-      }
-    end }
   -- explorer
   use { "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
@@ -127,7 +121,7 @@ require("packer").startup(function()
           "cssls",
           "eslint",
           "tsserver",
-          "marksman"
+          "marksman",
         },
       }
       require("mason-null-ls").setup {
@@ -198,7 +192,6 @@ require("packer").startup(function()
   use { "nvim-lualine/lualine.nvim",
     config = function() require "lualine".setup {
         extensions = {
-          "toggleterm",
           "neo-tree",
         },
         options = {
@@ -206,5 +199,4 @@ require("packer").startup(function()
         }
       }
     end }
-  use { "nvim-telescope/telescope.nvim" }
 end)

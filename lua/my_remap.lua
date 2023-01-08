@@ -6,6 +6,7 @@ local servers = {
   'pyright',
   'svelte',
   'taplo',
+  'yamlls',
   'jsonls',
   'cssls',
   'eslint',
@@ -45,7 +46,11 @@ for _, lsp in pairs(servers) do
 end
 
 local rust_opts = {
+  tools = {
+    executor = require("rust-tools.executors").quickfix,
+  },
   server = {
+    cmd = { "C:\\Users\\vkt\\AppData\\Local\\nvim-data\\mason\\packages\\rust-analyzer\\rust-analyzer.exe" },
     capabilities = capabilities,
     on_attach = on_attach,
   },
@@ -104,7 +109,6 @@ cmp.setup {
 -- explorer
 map('n', '<leader><tab>', ':Neotree toggle<CR>', opts)
 map('n', '<leader>`', ':Neotree buffers toggle<CR>', opts)
-map('n', '<leader>/', ':Telescope live_grep<CR>', opts)
 -- windows
 map('n', '<leader>j', '<C-W><C-j>', opts)
 map('n', '<leader>k', '<C-W><C-k>', opts)
@@ -139,12 +143,3 @@ map('i', '<CR>', '<CR><C-G>u', opts)
 -- add char at the end
 map('n', ';;', 'mxA;<ESC>`x', opts)
 map('n', ',,', 'mxA,<ESC>`x', opts)
-
-
-function _G.set_terminal_keymaps()
-  local opts = { noremap = true }
-  vim.api.nvim_buf_set_keymap(0, 't', '<esc>', [[<C-\><C-n>]], opts)
-end
-
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
