@@ -8,7 +8,7 @@ Prerequisites :
 
 ### Use POWERSHELL with admins
 ```sh
-choco install fd ripgrep nodejs zig
+choco install fd ripgrep nodejs-lts zig
 choco install neovim --pre
 choco install python3 --version=3.10
 
