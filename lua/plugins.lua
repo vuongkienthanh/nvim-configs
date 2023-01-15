@@ -122,6 +122,7 @@ require("packer").startup(function()
           "eslint",
           "tsserver",
           "marksman",
+          "svelte",
         },
       }
       require("mason-null-ls").setup {
