@@ -182,4 +182,7 @@ require("packer").startup(function()
         }
       }
     end }
+  use {
+    'nvim-telescope/telescope.nvim', branch = '0.1.x',
+  }
 end)

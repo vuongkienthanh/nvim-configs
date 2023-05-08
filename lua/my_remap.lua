@@ -1,5 +1,5 @@
 vim.g.mapleader = ' '
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 local servers = {
@@ -109,6 +109,8 @@ cmp.setup {
 -- explorer
 map('n', '<leader><tab>', ':Neotree toggle<CR>', opts)
 map('n', '<leader>`', ':Neotree buffers toggle<CR>', opts)
+local builtin = require('telescope.builtin')
+map('n', '<leader>fg', builtin.live_grep, opts)
 -- windows
 map('n', '<leader>j', '<C-W><C-j>', opts)
 map('n', '<leader>k', '<C-W><C-k>', opts)
