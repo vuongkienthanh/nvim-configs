@@ -11,7 +11,7 @@ local servers = {
   'cssls',
   'eslint',
   'html',
-  'sumneko_lua',
+  'lua_ls',
 }
 
 map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)

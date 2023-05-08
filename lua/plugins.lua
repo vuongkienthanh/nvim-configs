@@ -10,46 +10,33 @@ require("packer").startup(function()
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
   }
-  use { "catppuccin/nvim",
-    as = "catppuccin",
+  use { "rebelot/kanagawa.nvim",
     config = function()
-      require("catppuccin").setup {
-        flavour = "mocha",
-        dim_inactive = {
-          enabled = true,
-        },
-        styles = {
-          comments = { "italic" },
-          conditionals = { "italic" },
-          loops = { "italic" },
-        },
-        integrations = {
-          cmp = true,
-          native_lsp = { enabled = true },
-          indent_blankline = { enabled = true },
-          neotree = true,
-        },
+      require('kanagawa').setup {
+        compile = true,
+        dimInactive = true,
+        theme = 'dragon',
       }
-      vim.cmd.colorscheme "catppuccin"
+      vim.cmd.colorscheme "kanagawa"
     end }
   use { "kylechui/nvim-surround",
     config = function() require("nvim-surround").setup() end }
   use { "lukas-reineke/indent-blankline.nvim",
     config = function() require "indent_blankline".setup() end }
   use { "numToStr/Comment.nvim",
-    config = function() require "Comment".setup {
+    config = function()
+      require "Comment".setup {
         mapping = {
           extra = false
         }
       }
     end }
   use { "windwp/nvim-autopairs",
-    config = function() require("nvim-autopairs").setup {
+    config = function()
+      require("nvim-autopairs").setup {
         check_ts = true,
       }
     end }
-  use { "norcalli/nvim-colorizer.lua",
-    config = function() require "colorizer".setup() end }
   use { "uga-rosa/ccc.nvim",
     config = function()
       local ccc = require("ccc")
@@ -92,12 +79,12 @@ require("packer").startup(function()
       null_ls.setup {
         sources = {
           null_ls.builtins.formatting.black,
-          null_ls.builtins.diagnostics.sqlfluff.with({
-            extra_args = { "--dialect", "sqlite" },
-          }),
-          null_ls.builtins.formatting.sqlfluff.with({
-            extra_args = { "--dialect", "sqlite" },
-          }),
+          -- null_ls.builtins.diagnostics.sqlfluff.with({
+          --   extra_args = { "--dialect", "sqlite" },
+          -- }),
+          -- null_ls.builtins.formatting.sqlfluff.with({
+          --   extra_args = { "--dialect", "sqlite" },
+          -- }),
         },
       }
     end
@@ -116,7 +103,7 @@ require("packer").startup(function()
           "pyright",
           "taplo",
           "yamlls",
-          "sumneko_lua",
+          "lua_ls",
           "html",
           "cssls",
           "eslint",
@@ -154,7 +141,8 @@ require("packer").startup(function()
       "andymass/vim-matchup",
     },
     run = ":TSUpdate",
-    config = function() require "nvim-treesitter.configs".setup {
+    config = function()
+      require "nvim-treesitter.configs".setup {
         ensure_installed = {
           "rust",
           "python",
@@ -190,12 +178,10 @@ require("packer").startup(function()
     end }
   -- statusline
   use { "nvim-lualine/lualine.nvim",
-    config = function() require "lualine".setup {
+    config = function()
+      require "lualine".setup {
         extensions = {
           "neo-tree",
-        },
-        options = {
-          theme = "catppuccin"
         }
       }
     end }
