@@ -79,12 +79,8 @@ require("packer").startup(function()
       null_ls.setup {
         sources = {
           null_ls.builtins.formatting.black,
-          -- null_ls.builtins.diagnostics.sqlfluff.with({
-          --   extra_args = { "--dialect", "sqlite" },
-          -- }),
-          -- null_ls.builtins.formatting.sqlfluff.with({
-          --   extra_args = { "--dialect", "sqlite" },
-          -- }),
+          null_ls.builtins.diagnostics.sqlfluff,
+          null_ls.builtins.formatting.sqlfluff,
         },
       }
     end
