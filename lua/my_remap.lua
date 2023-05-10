@@ -50,7 +50,6 @@ local rust_opts = {
     executor = require("rust-tools.executors").quickfix,
   },
   server = {
-    cmd = { "C:\\Users\\vkt\\AppData\\Local\\nvim-data\\mason\\packages\\rust-analyzer\\rust-analyzer.exe" },
     capabilities = capabilities,
     on_attach = on_attach,
   },

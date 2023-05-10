@@ -79,8 +79,6 @@ require("packer").startup(function()
       null_ls.setup {
         sources = {
           null_ls.builtins.formatting.black,
-          null_ls.builtins.diagnostics.sqlfluff,
-          null_ls.builtins.formatting.sqlfluff,
         },
       }
     end
@@ -109,7 +107,7 @@ require("packer").startup(function()
         },
       }
       require("mason-null-ls").setup {
-        ensure_installed = { "black", "sqlfluff" },
+        ensure_installed = { "black"},
         automatic_installation = false,
         automatic_setup = false,
       }
