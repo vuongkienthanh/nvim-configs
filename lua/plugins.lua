@@ -107,7 +107,7 @@ require("packer").startup(function()
         },
       }
       require("mason-null-ls").setup {
-        ensure_installed = { "black"},
+        ensure_installed = { "black" },
         automatic_installation = false,
         automatic_setup = false,
       }
@@ -175,6 +175,9 @@ require("packer").startup(function()
   use { "nvim-lualine/lualine.nvim",
     config = function()
       require "lualine".setup {
+        sections = {
+          lualine_c = { { 'filename', path = 1 } }
+        },
         extensions = {
           "neo-tree",
         }
