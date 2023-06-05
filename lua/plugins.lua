@@ -62,7 +62,7 @@ require("packer").startup(function()
     branch = "v2.x",
     config = function()
       vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-      require("neo-tree").setup({close_if_last_window=true})
+      require("neo-tree").setup({ close_if_last_window = true })
     end
   }
 
@@ -104,6 +104,7 @@ require("packer").startup(function()
           "tsserver",
           "marksman",
           "svelte",
+          'jsonls',
         },
       }
       require("mason-null-ls").setup {
