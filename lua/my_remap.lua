@@ -3,7 +3,6 @@ local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
 local servers = {
-  'pyright',
   'svelte',
   'taplo',
   'yamlls',
@@ -17,7 +16,8 @@ local servers = {
 map('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 map('n', '<leader>q', '<cmd>lua vim.diagnostic.setqflist({severity = {min=vim.diagnostic.severity.WARN}})<CR>', opts)
 map('n', '<leader>a', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-local on_attach = function(client, bufnr)
+
+local default_on_attach = function(client, bufnr)
   local bmap = vim.api.nvim_buf_set_keymap
   bmap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   bmap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -41,17 +41,41 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = default_on_attach,
   }
 end
 
+-- python
+require('lspconfig').ruff_lsp.setup{}
+require('lspconfig').pyright.setup {
+  capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    local bmap = vim.api.nvim_buf_set_keymap
+    bmap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    bmap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    bmap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    bmap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    bmap(bufnr, 'i', '<C-l>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    bmap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    bmap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    bmap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    bmap(bufnr, 'n', '<leader>ws', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
+    bmap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    bmap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    bmap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    bmap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    bmap(bufnr, 'n', '<leader>f', '<cmd>Format<CR>', opts)
+    bmap(bufnr, 'n', '<leader>i', '<cmd>wa<CR><cmd>!isort -q --profile black . && black -q .<CR><cmd>wa<CR>', opts)
+  end,
+}
+-- rust
 local rust_opts = {
   tools = {
     executor = require("rust-tools.executors").quickfix,
   },
   server = {
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = default_on_attach,
     settings = {
       ['rust-analyzer'] = {
         cargo = {

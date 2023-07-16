@@ -71,46 +71,48 @@ require("packer").startup(function()
     "neovim/nvim-lspconfig",
     requires = {
       "onsails/lspkind-nvim",
-      "jose-elias-alvarez/null-ls.nvim",
       "simrat39/rust-tools.nvim",
     },
+  }
+  use {
+    "mhartington/formatter.nvim",
     config = function()
-      local null_ls = require("null-ls")
-      null_ls.setup {
-        sources = {
-          null_ls.builtins.formatting.black,
-        },
+      require("formatter").setup {
+        logging = false,
+        filetype = {
+          python = {
+            require("formatter.filetypes.python").black
+          }
+        }
       }
     end
   }
   use {
     "williamboman/mason.nvim",
     requires = {
-      "williamboman/mason-lspconfig.nvim",
-      "jayp0521/mason-null-ls.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
       require("mason").setup()
-      require("mason-lspconfig").setup {
+      require("mason-tool-installer").setup {
         ensure_installed = {
-          "rust_analyzer",
-          "pyright",
+          "rust-analyzer",
           "taplo",
-          "yamlls",
-          "lua_ls",
-          "html",
-          "cssls",
-          "eslint",
-          "tsserver",
+          "yaml-language-server",
+          "lua-language-server",
+          "html-lsp",
+          "css-lsp",
+          "eslint-lsp",
+          "typescript-language-server",
           "marksman",
-          "svelte",
-          'jsonls',
+          "svelte-language-server",
+          "json-lsp",
+          "pyright",
+          "ruff-lsp",
+          "ruff",
+          "isort",
+          "black",
         },
-      }
-      require("mason-null-ls").setup {
-        ensure_installed = { "black" },
-        automatic_installation = false,
-        automatic_setup = false,
       }
     end
   }
