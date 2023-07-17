@@ -59,9 +59,8 @@ require("packer").startup(function()
   }
   -- explorer
   use { "nvim-neo-tree/neo-tree.nvim",
-    branch = "v2.x",
+    branch = "v3.x",
     config = function()
-      vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
       require("neo-tree").setup({ close_if_last_window = true })
     end
   }
@@ -109,7 +108,6 @@ require("packer").startup(function()
           "json-lsp",
           "pyright",
           "ruff-lsp",
-          "ruff",
           "isort",
           "black",
         },
@@ -181,9 +179,6 @@ require("packer").startup(function()
         sections = {
           lualine_c = { { 'filename', path = 1 } }
         },
-        extensions = {
-          "neo-tree",
-        }
       }
     end }
   use {
