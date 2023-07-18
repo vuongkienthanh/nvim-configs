@@ -46,7 +46,6 @@ for _, lsp in pairs(servers) do
 end
 
 -- python
-require('lspconfig').ruff_lsp.setup{}
 require('lspconfig').pyright.setup {
   capabilities = capabilities,
   on_attach = function(client, bufnr)

@@ -107,7 +107,6 @@ require("packer").startup(function()
           "svelte-language-server",
           "json-lsp",
           "pyright",
-          "ruff-lsp",
           "isort",
           "black",
         },
