@@ -148,6 +148,9 @@ map('n', '<leader>l', '<C-W><C-l>', opts)
 -- color picker
 map('n', '<C-j>', ':CccPick<CR>', opts)
 map('i', '<C-j>', '<Plug>(ccc-insert)', opts)
+-- leap.nvim
+map('n', '<leader>s', '<Plug>(leap-forward-to)', opts)
+map('n', '<leader>d', '<Plug>(leap-backward-to)', opts)
 -- move line
 map('v', '<C-j>', ":m '>+1<CR>gv", opts)
 map('v', '<C-k>', ":m '<-2<CR>gv", opts)

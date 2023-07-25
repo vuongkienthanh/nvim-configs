@@ -31,11 +31,21 @@ require("packer").startup(function()
         }
       }
     end }
+  use { "ggandor/leap.nvim",
+    requires = {
+      "tpope/vim-repeat",
+    },
+  }
   use { "windwp/nvim-autopairs",
     config = function()
-      require("nvim-autopairs").setup {
+      local Rule = require('nvim-autopairs.rule')
+      local npairs = require('nvim-autopairs')
+      npairs.setup {
         check_ts = true,
       }
+      npairs.add_rules({},
+        Rule("'", "'", "-rs")
+      )
     end }
   use { "uga-rosa/ccc.nvim",
     config = function()
