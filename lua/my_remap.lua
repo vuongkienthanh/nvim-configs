@@ -64,7 +64,7 @@ require('lspconfig').pyright.setup {
     bmap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     bmap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     bmap(bufnr, 'n', '<leader>f', '<cmd>Format<CR>', opts)
-    bmap(bufnr, 'n', '<leader>i', '<cmd>wa<CR><cmd>!isort -q --profile black . && black -q .<CR><cmd>wa<CR>', opts)
+    bmap(bufnr, 'n', '<leader>i', '<cmd>wa<CR><cmd>!isort --profile black . && black .<CR><cmd>wa<CR>', opts)
   end,
 }
 -- rust
