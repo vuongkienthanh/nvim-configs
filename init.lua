@@ -44,12 +44,8 @@ vim.g.clipboard = {
 }
 
 require("keymaps")
-local path_sep = "/"
-if vim.fn.has("win32") == 1 then
-    path_sep = "\\"
-end
 
-local lazypath = vim.fn.stdpath("data") .. path_sep .. "lazy" .. path_sep .. "lazy.nvim"
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 print(lazypath)
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
