@@ -1,7 +1,7 @@
 local set = vim.opt
 set.number = true
 set.relativenumber = true
-set.mouse = 'a'
+set.mouse = "a"
 set.ignorecase = true
 set.smartcase = true
 set.wrap = false
@@ -10,11 +10,11 @@ set.swapfile = false
 set.backup = false
 set.writebackup = false
 set.showmode = false
-set.cmdheight=2
+set.cmdheight = 2
 set.hidden = true
 set.cursorline = true
-set.shortmess:append('c')
-set.encoding='utf-8'
+set.shortmess:append("c")
+set.encoding = "utf-8"
 set.termguicolors = true
 set.list = true
 set.listchars:append("eol:↴")
@@ -23,15 +23,43 @@ set.listchars:append("multispace:…")
 set.listchars:append("tab:>~")
 -- tab
 set.expandtab = true
-set.tabstop=2
-set.shiftwidth=2
+set.tabstop = 4
+set.shiftwidth = 4
 set.autoindent = true
 set.smartindent = true
 
-vim.g.python3_host_prog = 'python'
+vim.g.python3_host_prog = "python3"
 
--- ./lua/plugins.lua
-require('plugins')
+vim.g.clipboard = {
+    name = "WslClipboard",
+    copy = {
+        ["+"] = "clip.exe",
+        ["*"] = "clip.exe",
+    },
+    paste = {
+        ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+    },
+    cache_enabled = 0,
+}
 
--- ./lua/my_remap.lua
-require('my_remap')
+require("keymaps")
+local path_sep = "/"
+if vim.fn.has("win32") == 1 then
+    path_sep = "\\"
+end
+
+local lazypath = vim.fn.stdpath("data") .. path_sep .. "lazy" .. path_sep .. "lazy.nvim"
+print(lazypath)
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
+end
+vim.opt.rtp:prepend(lazypath)
+require("lazy").setup("plugins")

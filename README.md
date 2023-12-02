@@ -1,32 +1,28 @@
-My neovim configs for dev on windows
----
+# IDE neovim config on WSL
 
-Prerequisites :
-- chocolatey
-- scoop
-- git
-- rustup
-
-### Use POWERSHELL with admins
 ```sh
-choco install fd ripgrep nodejs-lts
-choco install neovim --pre
-choco install python3 --version=3.10
-scoop install gcc
-
-## rust toolchains
-rustup default nightly
-
-## packer: neovim package manager
-git clone https://github.com/wbthomason/packer.nvim "$env:LOCALAPPDATA\nvim-data\site\pack\packer\start\packer.nvim"
-
-
-## clone this repo
-git clone https://github.com/vuongkienthanh/nvim-configs.git "$env:LOCALAPPDATA\nvim\"
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update
+sudo apt install
+    wslu\
+    neovim\
+    unzip ripgrep fd-find\
+    gcc g++ make\
+    python3-full python3-venv python-pynvim\
 ```
 
-
-### Start nvim and sync
+# More packages for specific languages
+### Python
 ```sh
-:PackerSync
+sudo apt install python3-dev python3-doc
+```
+
+### Nodejs
+```sh
+sudo apt install nodejs npm
+```
+
+### Rust
+```sh
+sudo apt install rust-all rust-doc rust-src
 ```
