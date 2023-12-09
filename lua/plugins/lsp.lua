@@ -131,51 +131,33 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
-            "quangnguyen30192/cmp-nvim-ultisnips",
-            "SirVer/ultisnips",
             "nvim-autopairs",
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip",
         },
         config = function()
             local cmp = require("cmp")
-            local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
             cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
             cmp.setup({
-                sources = {
+                sources = cmp.config.sources({
                     { name = "nvim_lsp" },
-                    { name = "ultisnips" },
                     { name = "buffer" },
                     { name = "path" },
-                    { name = "nvim_lsp_signature_help" },
-                },
+                    { name = "luasnip" },
+                }),
                 snippet = {
                     expand = function(args)
-                        vim.fn["UltiSnips#Anon"](args.body)
+                        require("luasnip").lsp_expand(args.body)
                     end,
                 },
-                mapping = {
-                    ["<C-p>"] = cmp.mapping.select_prev_item(),
-                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+                    ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-o>"] = cmp.mapping.close(),
                     ["<C-e>"] = cmp.mapping.abort(),
-                    ["<CR>"] = cmp.mapping.confirm({
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = true,
-                    }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-                    end, {
-                        "i",
-                        "s",
-                    }),
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        cmp_ultisnips_mappings.jump_backwards(fallback)
-                    end, {
-                        "i",
-                        "s",
-                    }),
-                },
+                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+                }),
             })
         end,
     },
