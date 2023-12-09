@@ -81,6 +81,8 @@ return {
             end
             -- rust
             local rust_opts = {
+                capabilities = capabilities,
+                on_attach = default_on_attach,
                 settings = {
                     ["rust-analyzer"] = {
                         cargo = {
