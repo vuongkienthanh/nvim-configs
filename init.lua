@@ -30,19 +30,6 @@ set.smartindent = true
 
 vim.g.python3_host_prog = "python3"
 
-vim.g.clipboard = {
-    name = "WslClipboard",
-    copy = {
-        ["+"] = "clip.exe",
-        ["*"] = "clip.exe",
-    },
-    paste = {
-        ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    },
-    cache_enabled = 0,
-}
-
 require("keymaps")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

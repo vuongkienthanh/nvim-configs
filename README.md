@@ -1,14 +1,15 @@
-# IDE neovim config on WSL
+# IDE neovim config on Ubuntu
 
 ```sh
+sudo apt install software-properties-common
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
 sudo apt install
-    wslu\
     neovim\
+    git curl xclip\
     unzip ripgrep fd-find\
     gcc g++ make\
-    python3-full python3-venv python-pynvim\
+    python3-full python3-venv, python3-pynvim\
 ```
 
 # More packages for specific languages
