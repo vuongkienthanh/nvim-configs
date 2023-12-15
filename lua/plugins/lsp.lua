@@ -3,7 +3,7 @@ return {
         "stevearc/conform.nvim",
         keys = {
             {
-                "<leader>f",
+                "<leader>ff",
                 function()
                     require("conform").format({ async = true, lsp_fallback = true })
                 end,
