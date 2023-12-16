@@ -40,7 +40,7 @@ return {
                     opts
                 )
                 bmap(bufnr, "n", "<leader>qa", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-                bmap(bufnr, "n", "<leader>qz", "<cmd>lua vim.diagnostic.setqlist()<CR>", opts)
+                bmap(bufnr, "n", "<leader>qz", "<cmd>lua vim.diagnostic.setqflist()<CR>", opts)
                 bmap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
                 bmap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
                 bmap(bufnr, "n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
