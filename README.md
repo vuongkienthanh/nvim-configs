@@ -1,6 +1,9 @@
 # IDE neovim config on WSL
 
 ## on windows side
+
+use `win32yank` instead of clip.exe ( doesn't support utf8)
+
 ```sh
 choco install win32yank
 ```
