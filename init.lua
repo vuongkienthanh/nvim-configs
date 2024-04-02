@@ -33,8 +33,8 @@ vim.g.python3_host_prog = "python3"
 vim.g.clipboard = {
     name = "WslClipboard",
     copy = {
-        ["+"] = "clip.exe",
-        ["*"] = "clip.exe",
+        ["+"] = 'customclip(){ local STDIN=$(cat -); powershell.exe -command "Set-Clipboard" -Value "$STDIN"; }; customclip',
+        ["*"] = 'customclip(){ local STDIN=$(cat -); powershell.exe -command "Set-Clipboard" -Value "$STDIN"; }; customclip',
     },
     paste = {
         ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
