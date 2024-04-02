@@ -1,10 +1,15 @@
 # IDE neovim config on WSL
 
+## on windows side
+```sh
+choco install win32yank
+```
+
+## on wsl side
 ```sh
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
 sudo apt install
-    wslu\
     neovim\
     unzip ripgrep fd-find\
     gcc g++ make\

@@ -31,14 +31,14 @@ set.smartindent = true
 vim.g.python3_host_prog = "python3"
 
 vim.g.clipboard = {
-    name = "WslClipboard",
+    name = "win32yank-wsl",
     copy = {
-        ["+"] = 'customclip(){ local STDIN=$(cat -); powershell.exe -command "Set-Clipboard" -Value "$STDIN"; }; customclip',
-        ["*"] = 'customclip(){ local STDIN=$(cat -); powershell.exe -command "Set-Clipboard" -Value "$STDIN"; }; customclip',
+        ["+"] = "win32yank.exe -i --crlf",
+        ["*"] = "win32yank.exe -i --crlf",
     },
     paste = {
-        ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        ["+"] = "win32yank.exe -o --lf",
+        ["*"] = "win32yank.exe -o --lf",
     },
     cache_enabled = 0,
 }
