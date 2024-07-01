@@ -9,7 +9,7 @@ sudo apt install
     git curl xclip\
     unzip ripgrep fd-find\
     gcc g++ make\
-    python3-full python3-venv, python3-pynvim\
+    python3-full python3-venv python3-pynvim\
 ```
 
 # More packages for specific languages
