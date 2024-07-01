@@ -27,6 +27,9 @@ set.tabstop = 4
 set.shiftwidth = 4
 set.autoindent = true
 set.smartindent = true
+-- undo
+set.undofile = true
+set.undolevels = 1000
 
 vim.g.python3_host_prog = "python3"
 
