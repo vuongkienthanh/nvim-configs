@@ -29,7 +29,7 @@ set.autoindent = true
 set.smartindent = true
 -- undo
 set.undofile = true
-set.undolevels = 100
+set.undolevels = 1000
 
 vim.g.python3_host_prog = "python3"
 
