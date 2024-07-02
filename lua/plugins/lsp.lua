@@ -5,7 +5,7 @@ return {
             {
                 "<leader>ff",
                 function()
-                    require("conform").format({ async = true, lsp_fallback = true })
+                    require("conform").format({ lsp_format = "fallback" })
                 end,
             },
         },
@@ -17,54 +17,34 @@ return {
         },
     },
     {
-        "numToStr/Comment.nvim",
-        lazy = false,
-        opts = {
-            mappings = {
-                extra = false,
-            },
-        },
-    },
-    {
         "neovim/nvim-lspconfig",
         config = function()
             local default_on_attach = function(client, bufnr)
-                local bmap = vim.api.nvim_buf_set_keymap
-                local opts = { silent = true }
-                bmap(bufnr, "n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+                local bmap = function(mode, km, ex)
+                    vim.api.nvim_buf_set_keymap(bufnr, mode, km, ex, { silent = true })
+                end
+                -- diagnostic
+                bmap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>")
                 bmap(
-                    bufnr,
                     "n",
                     "<leader>qq",
-                    "<cmd>lua vim.diagnostic.setqflist({severity = {min=vim.diagnostic.severity.WARN}})<CR>",
-                    opts
+                    ":lua vim.diagnostic.setqflist({severity = {min=vim.diagnostic.severity.WARN}})<CR>"
                 )
-                bmap(bufnr, "n", "<leader>qa", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-                bmap(bufnr, "n", "<leader>qz", "<cmd>lua vim.diagnostic.setqflist()<CR>", opts)
-                bmap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-                bmap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-                -- bmap(bufnr, "n", "<leader>D", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
-                bmap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-                bmap(
-                    bufnr,
-                    "n",
-                    "<leader>i",
-                    "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
-                    opts
-                )
-                bmap(bufnr, "i", "<C-l>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-                -- bmap(bufnr, "n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>", opts)
-                -- bmap(bufnr, "n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>", opts)
-                -- bmap(
-                --     bufnr,
-                --     "n",
-                --     "<leader>wl",
-                --     "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>",
-                --     opts
-                -- )
-                bmap(bufnr, "n", "<leader>ws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>", opts)
-                bmap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-                bmap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+                bmap("n", "<leader>qa", "<cmd>lua vim.diagnostic.setloclist()<CR>")
+                bmap("n", "<leader>qz", "<cmd>lua vim.diagnostic.setqflist()<CR>")
+                -- workspace
+                -- bmap("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
+                -- bmap("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
+                -- bmap( "n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
+                bmap("n", "<leader>ws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
+                -- misc
+                bmap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
+                bmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+                bmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+                bmap("i", "<C-l>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+                bmap("n", "<leader>il", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
+                bmap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+                bmap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
             end
 
             local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -87,7 +67,7 @@ return {
                 })
             end
             -- rust
-            local rust_opts = {
+            require("lspconfig").rust_analyzer.setup({
                 capabilities = capabilities,
                 on_attach = default_on_attach,
                 settings = {
@@ -97,15 +77,12 @@ return {
                         },
                     },
                 },
-            }
-            require("lspconfig").rust_analyzer.setup(rust_opts)
+            })
         end,
     },
     {
         "williamboman/mason.nvim",
-        config = function()
-            require("mason").setup()
-        end,
+        config = true,
     },
     {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
