@@ -1,5 +1,3 @@
-local opts = { silent = true }
-
 return {
     { "nvim-lua/plenary.nvim" },
     { "nvim-tree/nvim-web-devicons" },
@@ -8,7 +6,7 @@ return {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
         keys = {
-            { "<leader><tab>", ":Neotree toggle<CR>", opts },
+            { "<leader><tab>", ":Neotree toggle<CR>" },
         },
     },
     {
@@ -18,11 +16,31 @@ return {
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
         keys = {
-            { "<leader>fg", ":Telescope live_grep<CR>", opts },
-            { "<leader>fb", ":Telescope buffers<CR>", opts },
+            { "<leader>fg", ":Telescope live_grep<CR>" },
+            { "<leader>fb", ":Telescope buffers<CR>" },
+            { "<leader>qq", ":lua require('telescope.builtin').diagnostics({bufnr=0, severity_bound=2})<CR>" },
+            { "<leader>qa", ":Telescope diagnostics<CR>" },
         },
         config = function()
-            require("telescope").setup()
+            require("telescope").setup({
+                defaults = {
+                    mappings = {
+                        n = {
+                            ["q"] = require("telescope.actions").close,
+                        },
+                    },
+                    initial_mode = "normal",
+                    scroll_strategy = "limit",
+                    preview = {
+                        filesize_limit = 0.1, -- MB
+                    },
+                },
+                pickers = {
+                    live_grep = {
+                        initial_mode = "insert",
+                    },
+                },
+            })
             require("telescope").load_extension("fzf")
         end,
     },

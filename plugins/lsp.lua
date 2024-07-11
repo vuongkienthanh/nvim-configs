@@ -1,85 +1,5 @@
 return {
-    {
-        "stevearc/conform.nvim",
-        keys = {
-            {
-                "<leader>ff",
-                function()
-                    require("conform").format({ lsp_format = "fallback" })
-                end,
-            },
-        },
-        opts = {
-            formatters_by_ft = {
-                lua = { "stylua" },
-                python = { "ruff_fix", "ruff_format" },
-            },
-        },
-    },
-    {
-        "neovim/nvim-lspconfig",
-        config = function()
-            local default_on_attach = function(client, bufnr)
-                local bmap = function(mode, km, ex)
-                    vim.api.nvim_buf_set_keymap(bufnr, mode, km, ex, { silent = true })
-                end
-                -- diagnostic
-                bmap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>")
-                bmap(
-                    "n",
-                    "<leader>qq",
-                    ":lua vim.diagnostic.setqflist({severity = {min=vim.diagnostic.severity.WARN}})<CR>"
-                )
-                bmap("n", "<leader>qa", "<cmd>lua vim.diagnostic.setloclist()<CR>")
-                bmap("n", "<leader>qz", "<cmd>lua vim.diagnostic.setqflist()<CR>")
-                -- workspace
-                -- bmap("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
-                -- bmap("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
-                -- bmap( "n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
-                bmap("n", "<leader>ws", "<cmd>lua vim.lsp.buf.workspace_symbol()<CR>")
-                -- misc
-                bmap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-                bmap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-                bmap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-                bmap("i", "<C-l>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-                bmap("n", "<leader>il", "<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
-                bmap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>")
-                bmap("n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-            end
-
-            local capabilities = require("cmp_nvim_lsp").default_capabilities()
-            local servers = {
-                "svelte",
-                "taplo",
-                "yamlls",
-                "jsonls",
-                "cssls",
-                "eslint",
-                "html",
-                "lua_ls",
-                "pyright",
-            }
-
-            for _, lsp in pairs(servers) do
-                require("lspconfig")[lsp].setup({
-                    capabilities = capabilities,
-                    on_attach = default_on_attach,
-                })
-            end
-            -- rust
-            require("lspconfig").rust_analyzer.setup({
-                capabilities = capabilities,
-                on_attach = default_on_attach,
-                settings = {
-                    ["rust-analyzer"] = {
-                        cargo = {
-                            features = "all",
-                        },
-                    },
-                },
-            })
-        end,
-    },
+    -- auto install with mason tools
     {
         "williamboman/mason.nvim",
         config = true,
@@ -108,6 +28,120 @@ return {
             })
         end,
     },
+    -- project lsp settings
+    { "folke/neoconf.nvim" },
+    -- generic formatter, replace lsp_format
+    {
+        "stevearc/conform.nvim",
+        keys = {
+            {
+                "<leader>ff",
+                function()
+                    require("conform").format({ lsp_format = "fallback" })
+                end,
+            },
+        },
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                python = { "ruff_fix", "ruff_format" },
+                ["*"] = { "squeeze_blanks" },
+            },
+        },
+    },
+    {
+        "antosha417/nvim-lsp-file-operations",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-neo-tree/neo-tree.nvim",
+        },
+        config = function()
+            require("lsp-file-operations").setup()
+        end,
+    },
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            local lspconfig = require("lspconfig")
+            require("neoconf").setup({
+                import = {
+                    vscode = false,
+                    coc = false,
+                    nlsp = false,
+                },
+                live_reload = false,
+            })
+
+            -- Set global defaults for all servers
+            lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+                capabilities = vim.tbl_deep_extend(
+                    "force",
+                    require("cmp_nvim_lsp").default_capabilities(),
+                    require("lsp-file-operations").default_capabilities()
+                ),
+            })
+
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    local bmap = function(mode, km, ex)
+                        vim.api.nvim_buf_set_keymap(args.buf, mode, km, ex, { silent = true })
+                    end
+                    bmap("n", "gri", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
+                    bmap("n", "<leader>e", ":lua vim.diagnostic.open_float()<CR>")
+                    -- defaults
+                    -- C-]: jump to definition
+                    -- C-T: jump back
+                    -- K: hover
+                    -- grn: rename
+                    -- gra: code action
+                    -- grr: references
+                    -- i_C-s: signature help
+                end,
+            })
+
+            local servers = {
+                "svelte",
+                "taplo",
+                "yamlls",
+                "jsonls",
+                "cssls",
+                "eslint",
+                "html",
+                "pyright",
+                "rust_analyzer",
+            }
+
+            for _, lsp in pairs(servers) do
+                require("lspconfig")[lsp].setup({})
+            end
+
+            -- lua_ls is mainly for neovim
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+            require("lspconfig").lua_ls.setup({
+                on_init = function(client)
+                    local path = client.workspace_folders[1].name
+                    if vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc") then
+                        return
+                    end
+
+                    client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+                        runtime = {
+                            version = "LuaJIT",
+                        },
+                        workspace = {
+                            checkThirdParty = false,
+                            library = {
+                                vim.env.VIMRUNTIME,
+                            },
+                        },
+                    })
+                end,
+                settings = {
+                    Lua = {},
+                },
+            })
+        end,
+    },
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -115,7 +149,6 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-path",
-            "nvim-autopairs",
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
         },

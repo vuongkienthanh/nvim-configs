@@ -18,7 +18,7 @@ map("n", "N", "Nzzzv")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 map("n", "zz", "zzzH")
-map("n", "<C-l>", ":ccl<CR>:lcl<CR>:nohls<CR><C-l>")
+map("n", "<C-l>", ":nohls<CR><C-l>")
 map("n", "J", "mxJ`x")
 -- copy visual selected to clipboard
 map("v", "<C-Y>", '"+y')

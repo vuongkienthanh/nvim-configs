@@ -13,6 +13,7 @@ return {
                     "python",
                     "lua",
                     "json",
+                    "jsonc",
                     "svelte",
                     "javascript",
                     "typescript",
@@ -28,7 +29,7 @@ return {
                     enable = true,
                     disable = function(lang, buf)
                         -- check parser
-                        local disable_parsers = { "vimdoc" }
+                        local disable_parsers = { "vimdoc", "csv" }
                         for _, v in pairs(disable_parsers) do
                             if v == lang then
                                 return true
@@ -36,7 +37,7 @@ return {
                         end
                         -- check filesize
                         local max_filesize = 100 * 1024
-                        local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+                        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
                         if ok and stats and stats.size > max_filesize then
                             return true
                         end
