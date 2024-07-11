@@ -4,6 +4,7 @@ return {
         lazy = false,
         config = function()
             vim.cmd.colorscheme("kanagawa-dragon")
+            require("kanagawa").setup({ compile = true })
         end,
     },
     {

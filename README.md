@@ -8,6 +8,7 @@ Don't use this repo, check out:
 - `:Mason`: lsp installer
 - [`:Neoconf`](https://github.com/folke/neoconf.nvim): project-wise lsp settings
     - [ example config ](./.neoconf.json)
+- `:KanagawaCompile`: colorscheme compile, required everytime colorscheme changed
 
 
 ## Keymaps:
