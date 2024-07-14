@@ -1,14 +1,17 @@
-# nvim-config submodule
-Don't use this repo, check out:
+# My config for neovim
+
+## Installation
+For different platforms, check out:
 - wsl: https://github.com/vuongkienthanh/nvim-configs-wsl
 - linux: https://github.com/vuongkienthanh/nvim-configs-linux
 
 ## Commands:
 - `:Lazy`: package manager
 - `:Mason`: lsp installer
+- `:TSUpdateSync`: download treesitter nessessary files
 - [`:Neoconf`](https://github.com/folke/neoconf.nvim): project-wise lsp settings
     - [ example config ](./.neoconf.json)
-- `:KanagawaCompile`: colorscheme compile, required everytime colorscheme changed
+- `:KanagawaCompile`: colorscheme compile, faster loading time, required everytime colorscheme changed
 
 
 ## Keymaps:
