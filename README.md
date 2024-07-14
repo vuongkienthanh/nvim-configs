@@ -1,6 +1,6 @@
 # My config for neovim
 
-## Installation
+## Installation & Update
 For different platforms, check out:
 - wsl: https://github.com/vuongkienthanh/nvim-configs-wsl
 - linux: https://github.com/vuongkienthanh/nvim-configs-linux
