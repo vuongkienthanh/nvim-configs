@@ -52,9 +52,11 @@ return {
                         keymaps = {
                             ["af"] = "@function.outer",
                             ["if"] = "@function.inner",
+                            ["ac"] = "@class.outer",
+                            ["ic"] = "@class.inner",
                             -- method call
-                            ["ac"] = "@call.outer",
-                            ["ic"] = "@call.inner",
+                            ["am"] = "@call.outer",
+                            ["im"] = "@call.inner",
                         },
                     },
                 },
