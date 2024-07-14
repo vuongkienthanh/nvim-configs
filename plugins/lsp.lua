@@ -87,10 +87,12 @@ return {
                         vim.api.nvim_buf_set_keymap(args.buf, mode, km, ex, { silent = true })
                     end
                     bmap("n", "gri", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
+                    bmap("n", "grr", ":lua builtin.lsp_references<CR>")
                     bmap("n", "<leader>e", ":lua vim.diagnostic.open_float()<CR>")
                     -- defaults
+                    -- C-w d: open float
                     -- C-]: jump to definition
-                    -- C-T: jump back
+                    -- C-t: jump back
                     -- K: hover
                     -- grn: rename
                     -- gra: code action

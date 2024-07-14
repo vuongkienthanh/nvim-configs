@@ -16,6 +16,7 @@ return {
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
         },
         keys = {
+            { "<leader>fp", ":Telescope builtin<CR>" },
             { "<leader>fg", ":Telescope live_grep<CR>" },
             { "<leader>fb", ":Telescope buffers<CR>" },
             { "<leader>qq", ":lua require('telescope.builtin').diagnostics({bufnr=0, severity_bound=2})<CR>" },
