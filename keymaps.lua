@@ -35,3 +35,5 @@ map("i", "<CR>", "<CR><C-G>u")
 -- add char at the end
 map("n", ";;", "mxA;<ESC>`x")
 map("n", ",,", "mxA,<ESC>`x")
+-- insert at second end
+map("n", "Z", "<End>i")
