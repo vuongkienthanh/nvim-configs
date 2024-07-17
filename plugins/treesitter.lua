@@ -1,7 +1,7 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
+        build = ":TSUpdateSync",
         dependencies = {
             "andymass/vim-matchup",
             "nvim-treesitter/nvim-treesitter-textobjects",

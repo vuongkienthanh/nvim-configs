@@ -1,4 +1,7 @@
 return {
+    { "nvim-lua/plenary.nvim" },
+    { "nvim-tree/nvim-web-devicons" },
+    { "MunifTanjim/nui.nvim" },
     {
         "rebelot/kanagawa.nvim",
         lazy = false,
@@ -10,6 +13,7 @@ return {
     {
         "lukas-reineke/indent-blankline.nvim",
         main = "ibl",
+        lazy = false,
         opts = {
             scope = {
                 char = "┠",
@@ -18,12 +22,13 @@ return {
     },
     {
         "nvim-lualine/lualine.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = {
             options = {
-                theme = "nightfly",
+                theme = "jellybeans",
             },
             sections = {
-                lualine_c = { { "filename", path = 1 } },
+                lualine_c = { { "filename", path = 1 }, "filesize" },
             },
         },
     },

@@ -1,35 +1,4 @@
 return {
-    -- auto install with mason tools
-    {
-        "williamboman/mason.nvim",
-        config = true,
-    },
-    {
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
-        dependencies = "williamboman/mason.nvim",
-        config = function()
-            require("mason-tool-installer").setup({
-                ensure_installed = {
-                    "rust-analyzer",
-                    "taplo",
-                    "yaml-language-server",
-                    "lua-language-server",
-                    "html-lsp",
-                    "css-lsp",
-                    "eslint-lsp",
-                    "typescript-language-server",
-                    "marksman",
-                    "svelte-language-server",
-                    "json-lsp",
-                    "pyright",
-                    "ruff",
-                    "stylua",
-                },
-            })
-        end,
-    },
-    -- project lsp settings
-    { "folke/neoconf.nvim" },
     -- generic formatter, replace lsp_format
     {
         "stevearc/conform.nvim",
@@ -55,12 +24,15 @@ return {
             "nvim-lua/plenary.nvim",
             "nvim-neo-tree/neo-tree.nvim",
         },
-        config = function()
-            require("lsp-file-operations").setup()
-        end,
+        opt = {},
     },
     {
         "neovim/nvim-lspconfig",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+            -- project lsp settings
+            "folke/neoconf.nvim",
+        },
         config = function()
             local lspconfig = require("lspconfig")
             require("neoconf").setup({
@@ -86,9 +58,16 @@ return {
                     local bmap = function(mode, km, ex)
                         vim.api.nvim_buf_set_keymap(args.buf, mode, km, ex, { silent = true })
                     end
+                    -- more configs at telescope ./editor.lua
                     bmap("n", "gri", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
-                    bmap("n", "grr", ":lua builtin.lsp_references()<CR>")
+                    bmap("n", "grr", ":Telescope lsp_references<CR>")
                     bmap("n", "<leader>e", ":lua vim.diagnostic.open_float()<CR>")
+                    bmap(
+                        "n",
+                        "<leader>qq",
+                        ":lua require('telescope.builtin').diagnostics({bufnr=0, severity_bound=2})<CR>"
+                    )
+                    bmap("n", "<leader>qa", ":Telescope diagnostics<CR>")
                     -- defaults
                     -- C-w d: open float
                     -- C-]: jump to definition
@@ -141,41 +120,6 @@ return {
                 settings = {
                     Lua = {},
                 },
-            })
-        end,
-    },
-    {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            "neovim/nvim-lspconfig",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-path",
-            "L3MON4D3/LuaSnip",
-            "saadparwaiz1/cmp_luasnip",
-        },
-        config = function()
-            local cmp = require("cmp")
-            cmp.event:on("confirm_done", require("nvim-autopairs.completion.cmp").on_confirm_done())
-            cmp.setup({
-                sources = cmp.config.sources({
-                    { name = "nvim_lsp" },
-                    { name = "buffer" },
-                    { name = "path" },
-                    { name = "luasnip" },
-                }),
-                snippet = {
-                    expand = function(args)
-                        require("luasnip").lsp_expand(args.body)
-                    end,
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-                    ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-                    ["<C-e>"] = cmp.mapping.abort(),
-                    ["<C-f>"] = cmp.mapping.confirm({ select = false }),
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                }),
             })
         end,
     },

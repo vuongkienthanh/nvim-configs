@@ -1,7 +1,4 @@
 return {
-    { "nvim-lua/plenary.nvim" },
-    { "nvim-tree/nvim-web-devicons" },
-    { "MunifTanjim/nui.nvim" },
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
@@ -19,8 +16,6 @@ return {
             { "<leader>fp", ":Telescope builtin<CR>" },
             { "<leader>fg", ":Telescope live_grep<CR>" },
             { "<leader>fb", ":Telescope buffers<CR>" },
-            { "<leader>qq", ":lua require('telescope.builtin').diagnostics({bufnr=0, severity_bound=2})<CR>" },
-            { "<leader>qa", ":Telescope diagnostics<CR>" },
         },
         config = function()
             require("telescope").setup({
