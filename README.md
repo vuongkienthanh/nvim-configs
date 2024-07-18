@@ -13,8 +13,10 @@ For different platforms, check out:
     - [ example config ](./.neoconf.json)
 - `:KanagawaCompile`: colorscheme compile, faster loading time, required everytime colorscheme changed
 
-
 ## Keymaps:
+
+`<leader> = <space>`
+
 ### IDE
 - `<leader>tab`: file explorer
 - `<leader>fb`: buffers

@@ -58,17 +58,16 @@ return {
                     local bmap = function(mode, km, ex)
                         vim.api.nvim_buf_set_keymap(args.buf, mode, km, ex, { silent = true })
                     end
-                    -- more configs at telescope ./editor.lua
                     bmap("n", "gri", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
                     bmap("n", "grr", ":Telescope lsp_references<CR>")
-                    bmap("n", "<leader>e", ":lua vim.diagnostic.open_float()<CR>")
+                    bmap("n", "<leader>d", ":lua vim.diagnostic.open_float()<CR>")
                     bmap(
                         "n",
                         "<leader>qq",
                         ":lua require('telescope.builtin').diagnostics({bufnr=0, severity_bound=2})<CR>"
                     )
                     bmap("n", "<leader>qa", ":Telescope diagnostics<CR>")
-                    -- defaults
+                    -- :h lsp-defaults
                     -- C-w d: open float
                     -- C-]: jump to definition
                     -- C-t: jump back

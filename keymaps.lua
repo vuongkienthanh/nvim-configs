@@ -4,6 +4,11 @@ local map = function(mode, km, ex)
     vim.keymap.set(mode, km, ex, { silent = true })
 end
 
+-- quicker window moving
+map("n", "<leader>j", ":wincmd j")
+map("n", "<leader>k", ":wincmd k")
+map("n", "<leader>h", ":wincmd h")
+map("n", "<leader>l", ":wincmd l")
 -- move line
 map("v", "<C-j>", ":m '>+1<CR>gv")
 map("v", "<C-k>", ":m '<-2<CR>gv")
