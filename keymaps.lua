@@ -4,11 +4,6 @@ local map = function(mode, km, ex)
     vim.keymap.set(mode, km, ex, { silent = true })
 end
 
--- windows
-map("n", "<leader>j", "<C-W><C-j>")
-map("n", "<leader>k", "<C-W><C-k>")
-map("n", "<leader>h", "<C-W><C-h>")
-map("n", "<leader>l", "<C-W><C-l>")
 -- move line
 map("v", "<C-j>", ":m '>+1<CR>gv")
 map("v", "<C-k>", ":m '<-2<CR>gv")
