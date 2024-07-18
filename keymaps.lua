@@ -5,10 +5,10 @@ local map = function(mode, km, ex)
 end
 
 -- quicker window moving
-map("n", "<leader>j", ":wincmd j")
-map("n", "<leader>k", ":wincmd k")
-map("n", "<leader>h", ":wincmd h")
-map("n", "<leader>l", ":wincmd l")
+map("n", "<leader>j", ":wincmd j<CR>")
+map("n", "<leader>k", ":wincmd k<CR>")
+map("n", "<leader>h", ":wincmd h<CR>")
+map("n", "<leader>l", ":wincmd l<CR>")
 -- move line
 map("v", "<C-j>", ":m '>+1<CR>gv")
 map("v", "<C-k>", ":m '<-2<CR>gv")
