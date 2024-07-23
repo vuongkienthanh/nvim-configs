@@ -3,9 +3,6 @@
     "lspconfig": {
         "lua_ls" :{
             "Lua.completion.callSnippet": "Replace"
-        }, 
-        "rust_analyzer" : {
-            "rust_analyzer.cargo.features" : "all"
         }
     }
 }
