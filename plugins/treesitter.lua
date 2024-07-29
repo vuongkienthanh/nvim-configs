@@ -50,13 +50,24 @@ return {
                         enable = true,
                         lookahead = true,
                         keymaps = {
+                            -- def, fn, function
                             ["af"] = "@function.outer",
                             ["if"] = "@function.inner",
+                            -- class, impl, enum, struct
                             ["ac"] = "@class.outer",
                             ["ic"] = "@class.inner",
                             -- method call
                             ["am"] = "@call.outer",
                             ["im"] = "@call.inner",
+                            -- conditional
+                            ["ao"] = "@conditional.outer",
+                            ["io"] = "@conditional.inner",
+                            -- loop
+                            ["al"] = "@loop.outer",
+                            ["il"] = "@loop.inner",
+                            -- block
+                            ["ab"] = "@block.outer",
+                            ["ib"] = "@block.inner",
                         },
                     },
                 },
