@@ -48,4 +48,8 @@ For different platforms, check out:
 
 ## Text-objects:
 - `if`, `af`: function
-- `ic`, `ac`: method call
+- `ic`, `ac`: class
+- `im`, `am`: method call
+- `io`, `ao`: conditional
+- `il`, `al`: loop
+- `ib`, `ab`: block
