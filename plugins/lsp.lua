@@ -61,11 +61,12 @@ return {
                     end
                     bmap("n", "gri", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
                     bmap("n", "grr", ":Telescope lsp_references<CR>")
+                    bmap("n", "grm", ":Telescope lsp_implementations<CR>")
                     bmap("n", "<leader>d", ":lua vim.diagnostic.open_float()<CR>")
                     bmap(
                         "n",
                         "<leader>qq",
-                        ":lua require('telescope.builtin').diagnostics({bufnr=0, severity_bound=2})<CR>"
+                        ":lua require('telescope.builtin').diagnostics({bufnr=0, severity_limit=2})<CR>"
                     )
                     bmap("n", "<leader>qa", ":Telescope diagnostics<CR>")
                     -- :h lsp-defaults

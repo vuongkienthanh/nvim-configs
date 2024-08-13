@@ -21,7 +21,9 @@ map("n", "zz", "zzzH")
 map("n", "<C-l>", ":nohls<CR><C-l>")
 map("n", "J", "mxJ`x")
 -- copy visual selected to clipboard
-map("v", "<C-Y>", '"+y')
+map("v", "<C-Y>", '"+ygv<ESC>')
+-- better linewise yank
+map("v", "y", "ygv<ESC>")
 -- paste last yanked
 map("n", "<C-P>", '"0p')
 -- Undo break point
