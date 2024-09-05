@@ -3,7 +3,6 @@ return {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdateSync",
         dependencies = {
-            "andymass/vim-matchup",
             "nvim-treesitter/nvim-treesitter-textobjects",
         },
         config = function()
@@ -44,7 +43,6 @@ return {
                     end,
                     additional_vim_regex_highlighting = false,
                 },
-                matchup = { enable = true },
                 textobjects = {
                     select = {
                         enable = true,
@@ -72,16 +70,6 @@ return {
                     },
                 },
             })
-        end,
-    },
-    {
-        "andymass/vim-matchup",
-        init = function()
-            vim.g.matchup_motion_enabled = 1
-            -- linewise operation with matchup
-            vim.g.matchup_text_obj_enabled = 1
-            -- ignore strings & comments
-            vim.g.matchup_delim_noskips = 2
         end,
     },
 }
