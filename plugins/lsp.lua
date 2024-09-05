@@ -19,14 +19,6 @@ return {
         },
     },
     {
-        "antosha417/nvim-lsp-file-operations",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-neo-tree/neo-tree.nvim",
-        },
-        opt = {},
-    },
-    {
         "neovim/nvim-lspconfig",
         dependencies = {
             "nvim-telescope/telescope.nvim",
@@ -49,8 +41,7 @@ return {
                 capabilities = vim.tbl_deep_extend(
                     "force",
                     vim.lsp.protocol.make_client_capabilities(),
-                    require("cmp_nvim_lsp").default_capabilities(),
-                    require("lsp-file-operations").default_capabilities()
+                    require("cmp_nvim_lsp").default_capabilities()
                 ),
             })
 
