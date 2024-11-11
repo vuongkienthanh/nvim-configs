@@ -19,6 +19,43 @@ return {
         },
     },
     {
+        "linux-cultist/venv-selector.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+        },
+        lazy = false,
+        branch = "regexp", -- This is the regexp branch, use this for the new version
+        config = function()
+            require("venv-selector").setup({
+                settings = {
+                    -- disable all default search, leave only lsp
+                    -- I use uv for dev
+                    search = {
+                        virtualenvs = false,
+                        hatch = false,
+                        poetry = false,
+                        pyenv = false,
+                        pipenv = false,
+                        anaconda_envs = false,
+                        anaconda_base = false,
+                        miniconda_envs = false,
+                        miniconda_base = false,
+                        pipx = false,
+                        cwd = false,
+                        workspace = {
+                            command = "$FD '/bin/python$' $WORKSPACE_PATH --full-path --color never -E /proc -HI -a -L",
+                        },
+                        file = false,
+                    },
+                },
+            })
+        end,
+        keys = {
+            { "<leader>v", "<cmd>VenvSelect<cr>" },
+        },
+    },
+    {
         "neovim/nvim-lspconfig",
         dependencies = {
             "nvim-telescope/telescope.nvim",
