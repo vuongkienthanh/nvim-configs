@@ -26,7 +26,7 @@ set.expandtab = true
 set.tabstop = 4
 set.shiftwidth = 4
 set.autoindent = true
-set.smartindent = true
+set.smartindent = false
 -- undo
 set.undofile = true
 set.undolevels = 1000
