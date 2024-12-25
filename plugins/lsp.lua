@@ -61,6 +61,7 @@ return {
             "nvim-telescope/telescope.nvim",
             -- project lsp settings
             "folke/neoconf.nvim",
+            "saghen/blink.cmp",
         },
         config = function()
             local lspconfig = require("lspconfig")
@@ -78,10 +79,9 @@ return {
                 capabilities = vim.tbl_deep_extend(
                     "force",
                     vim.lsp.protocol.make_client_capabilities(),
-                    require("cmp_nvim_lsp").default_capabilities()
+                    require("blink.cmp").get_lsp_capabilities({})
                 ),
             })
-
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)
                     local bmap = function(mode, km, ex)
