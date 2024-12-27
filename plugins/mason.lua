@@ -10,20 +10,34 @@ return {
         config = function()
             require("mason-tool-installer").setup({
                 ensure_installed = {
-                    "rust-analyzer",
+                    -- generic
                     "taplo",
                     "yaml-language-server",
-                    "lua-language-server",
-                    "html-lsp",
-                    "css-lsp",
-                    "eslint-lsp",
-                    "typescript-language-server",
-                    "marksman",
-                    "svelte-language-server",
                     "json-lsp",
-                    "pyright",
-                    "ruff",
-                    "stylua",
+                    "marksman",
+
+                    -- lua
+                    -- "lua-language-server",
+                    "stylua", -- formatter
+
+                    -- web deb
+                    -- "html-lsp",
+                    -- "css-lsp",
+                    -- "eslint-lsp",
+                    -- "typescript-language-server",
+                    -- "svelte-language-server",
+
+                    -- python
+                    "pyright", -- type checker
+                    "ruff", -- formatter
+
+                    -- rust
+                    "rust-analyzer",
+                },
+                integrations = {
+                    ["mason-lspconfig"] = false,
+                    ["mason-null-ls"] = false,
+                    ["mason-nvim-dap"] = false,
                 },
             })
         end,
