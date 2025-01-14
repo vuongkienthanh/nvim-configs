@@ -30,13 +30,12 @@ For different platforms, check out:
 ### autocomplete
 - `C-n`: next
 - `C-p`: prev
-- `C-e`: abort and revert
-- `C-f`: abort but change to selection
-- `enter`: select and expand
+- `C-e`: abort
+- `C-y`: select
 
 ### lsp
 - `<leader>ff`: format
-- `<leader>e`: open float
+- `<leader>d`: open diagnostics
 - `C-]`: jump to definition
 - `C-T`: jump back
 - `K`: hover
