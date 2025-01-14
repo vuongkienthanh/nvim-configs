@@ -8,21 +8,26 @@ return {
         config = function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = {
+                    -- programming languages
                     "rust",
                     "python",
                     "lua",
-                    "json",
-                    "jsonc",
+                    -- webdev
                     "svelte",
                     "javascript",
                     "typescript",
                     "html",
                     "css",
-                    "markdown",
-                    "sql",
+                    -- configs
+                    "json",
+                    "jsonc",
                     "toml",
                     "yaml",
+                    -- others
+                    "markdown",
                     "vimdoc",
+                    "sql",
+                    "csv",
                 },
                 highlight = {
                     enable = true,

@@ -6,12 +6,16 @@ For different platforms, check out:
 - linux: https://github.com/vuongkienthanh/nvim-configs-linux
 
 ## Commands:
+### Set up First time:
+- `:MasonToolsInstall` 
+- `:KanagawaCompile`: colorscheme compile, faster loading time, required everytime colorscheme changed
+### Keep up to date
 - `:Lazy`: package manager
 - `:Mason`: lsp installer
-- `:TSUpdateSync`: download treesitter nessessary files
+### Others
 - [`:Neoconf`](https://github.com/folke/neoconf.nvim): project-wise lsp settings
     - [ example config ](./.neoconf.json)
-- `:KanagawaCompile`: colorscheme compile, faster loading time, required everytime colorscheme changed
+
 
 ## Keymaps:
 
