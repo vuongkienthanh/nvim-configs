@@ -17,7 +17,7 @@ return {
                     "marksman",
 
                     -- lua
-                    -- "lua-language-server",
+                    "lua-language-server",
                     "stylua", -- formatter
 
                     -- web deb
