@@ -64,6 +64,7 @@ return {
             "saghen/blink.cmp",
         },
         config = function()
+            vim.diagnostic.config({ virtual_text = true })
             local lspconfig = require("lspconfig")
             require("neoconf").setup({
                 import = {
@@ -110,14 +111,26 @@ return {
             })
 
             local servers = {
-                "svelte",
+                -- generic
                 "taplo",
                 "yamlls",
                 "jsonls",
-                "cssls",
-                "eslint",
+                "marksman",
+
+                -- lua
+                --
+
+                -- web dev
                 "html",
+                "cssls",
+                -- "eslint",
+                "ts_ls",
+                -- "svelte",
+
+                -- python
                 "pyright",
+
+                -- rust
                 "rust_analyzer",
             }
 

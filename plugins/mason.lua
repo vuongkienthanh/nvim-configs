@@ -19,15 +19,15 @@ return {
                 "lua-language-server",
                 "stylua", -- formatter
 
-                -- web deb
-                -- "html-lsp",
-                -- "css-lsp",
+                -- web dev
+                "html-lsp",
+                "css-lsp",
                 -- "eslint-lsp",
-                -- "typescript-language-server",
+                "typescript-language-server",
                 -- "svelte-language-server",
 
                 -- python
-                "pyright", -- type checker
+                "pyright",
                 "ruff", -- formatter
 
                 -- rust

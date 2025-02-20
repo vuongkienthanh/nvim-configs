@@ -72,6 +72,12 @@ return {
                             ["ab"] = "@block.outer",
                             ["ib"] = "@block.inner",
                         },
+                        selection_modes = {
+                            ["@class.outer"] = "V",
+                            ["@function.outer"] = "V",
+                            ["@conditional.outer"] = "V",
+                            ["@loop.outer"] = "V",
+                        },
                     },
                 },
                 indent = {
