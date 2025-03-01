@@ -8,14 +8,12 @@ For different platforms, check out:
 ## Commands:
 ### Set up First time:
 - `:MasonToolsInstall` 
-- `:KanagawaCompile`: colorscheme compile, faster loading time, required everytime colorscheme changed
 ### Keep up to date
 - `:Lazy`: package manager
 - `:Mason`: lsp installer
 ### Others
 - [`:Neoconf`](https://github.com/folke/neoconf.nvim): project-wise lsp settings
     - [ example config ](./.neoconf.json)
-
 
 ## Keymaps:
 

@@ -35,9 +35,15 @@ return {
                     live_grep = {
                         initial_mode = "insert",
                     },
+                    builtin = {
+                        previewer = false,
+                    },
                 },
             })
             require("telescope").load_extension("fzf")
         end,
+    },
+    {
+        "pteroctopus/faster.nvim",
     },
 }
