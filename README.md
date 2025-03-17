@@ -11,9 +11,6 @@ For different platforms, check out:
 ### Keep up to date
 - `:Lazy`: package manager
 - `:Mason`: lsp installer
-### Others
-- [`:Neoconf`](https://github.com/folke/neoconf.nvim): project-wise lsp settings
-    - [ example config ](./.neoconf.json)
 
 ## Keymaps:
 

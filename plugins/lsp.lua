@@ -60,20 +60,11 @@ return {
         dependencies = {
             "nvim-telescope/telescope.nvim",
             -- project lsp settings
-            "folke/neoconf.nvim",
             "saghen/blink.cmp",
         },
         config = function()
             vim.diagnostic.config({ virtual_text = true })
             local lspconfig = require("lspconfig")
-            require("neoconf").setup({
-                import = {
-                    vscode = false,
-                    coc = false,
-                    nlsp = false,
-                },
-                live_reload = false,
-            })
 
             -- Set global defaults for all servers
             lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
@@ -118,7 +109,7 @@ return {
                 "marksman",
 
                 -- lua
-                --
+                -- "lua_ls"
 
                 -- web dev
                 "html",
@@ -131,15 +122,28 @@ return {
                 "pyright",
 
                 -- rust
-                "rust_analyzer",
+                -- "rust_analyzer",
             }
 
             for _, lsp in pairs(servers) do
                 require("lspconfig")[lsp].setup({})
             end
 
+            require("lspconfig")["rust_analyzer"].setup({
+                settings = {
+                    ["rust-analyzer"] = {
+                        cargo = {
+                            features = "all",
+                        },
+                        check = {
+                            command = "clippy",
+                        },
+                    },
+                },
+            })
+
             -- lua_ls is mainly for neovim
-            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lua_ls
+            -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
             require("lspconfig").lua_ls.setup({
                 on_init = function(client)
                     local path = client.workspace_folders[1].name
