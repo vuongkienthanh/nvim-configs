@@ -43,9 +43,6 @@ return {
                         miniconda_base = false,
                         pipx = false,
                         cwd = false,
-                        workspace = {
-                            command = "$FD '/bin/python$' $WORKSPACE_PATH --full-path --color never -E /proc -HI -a -L",
-                        },
                         file = false,
                     },
                 },
@@ -59,7 +56,6 @@ return {
         "neovim/nvim-lspconfig",
         dependencies = {
             "nvim-telescope/telescope.nvim",
-            -- project lsp settings
             "saghen/blink.cmp",
         },
         config = function()
@@ -79,10 +75,10 @@ return {
                     local bmap = function(mode, km, ex)
                         vim.api.nvim_buf_set_keymap(args.buf, mode, km, ex, { silent = true })
                     end
-                    bmap("n", "gri", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
                     bmap("n", "grr", ":Telescope lsp_references<CR>")
                     bmap("n", "grm", ":Telescope lsp_implementations<CR>")
                     bmap("n", "<leader>d", ":lua vim.diagnostic.open_float()<CR>")
+                    bmap("n", "<leader>i", ":lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>")
                     bmap(
                         "n",
                         "<leader>qq",
