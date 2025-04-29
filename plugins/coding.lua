@@ -18,19 +18,10 @@ return {
     },
     {
         "ggandor/leap.nvim",
-        event = "VeryLazy",
-        keys = {
-            {
-                "<leader>s",
-                function()
-                    print("leaping...")
-                    local current_window = vim.fn.win_getid()
-                    require("leap").leap({ target_windows = { current_window } })
-                    print(" ")
-                end,
-                opts,
-            },
-        },
+        lazy = false,
+        config = function()
+            vim.keymap.set("n", "<leader>s", "<Plug>(leap)")
+        end,
     },
     {
         "uga-rosa/ccc.nvim",
@@ -45,7 +36,7 @@ return {
                     ccc.output.css_rgb,
                     ccc.output.float,
                     {
-                        name = "RGB args",
+                        name = "RGB tuple",
                         str = function(RGB, A)
                             local R, G, B = unpack(RGB)
                             if A then
@@ -86,5 +77,59 @@ return {
                 pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
             })
         end,
+    },
+    {
+        "stevearc/conform.nvim",
+        keys = {
+            {
+                "<leader>ff",
+                function()
+                    require("conform").format({ lsp_format = "fallback" })
+                end,
+            },
+        },
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                python = { "ruff_fix", "ruff_format" },
+            },
+        },
+    },
+    {
+        "linux-cultist/venv-selector.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+            { "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
+        },
+        lazy = false,
+        branch = "regexp", -- This is the regexp branch, use this for the new version
+        config = function()
+            require("venv-selector").setup({
+                settings = {
+                    -- disable all default search, leave only lsp
+                    -- I use uv for dev
+                    search = {
+                        virtualenvs = false,
+                        hatch = false,
+                        poetry = false,
+                        pyenv = false,
+                        pipenv = false,
+                        anaconda_envs = false,
+                        anaconda_base = false,
+                        miniconda_envs = false,
+                        miniconda_base = false,
+                        pipx = false,
+                        cwd = false,
+                        file = false,
+                    },
+                },
+            })
+        end,
+        keys = {
+            { "<leader>v", "<cmd>VenvSelect<cr>" },
+        },
+    },
+    {
+        "neovim/nvim-lspconfig",
     },
 }
