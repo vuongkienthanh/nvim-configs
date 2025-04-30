@@ -5,11 +5,7 @@ return {
         "kylechui/nvim-surround",
         version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
         event = "VeryLazy",
-        config = function()
-            require("nvim-surround").setup({
-                -- Configuration here, or leave empty to use defaults
-            })
-        end,
+        opts = {},
     },
     {
         "windwp/nvim-autopairs",
@@ -103,31 +99,10 @@ return {
         },
         lazy = false,
         branch = "regexp", -- This is the regexp branch, use this for the new version
-        config = function()
-            require("venv-selector").setup({
-                settings = {
-                    -- disable all default search, leave only lsp
-                    -- I use uv for dev
-                    search = {
-                        virtualenvs = false,
-                        hatch = false,
-                        poetry = false,
-                        pyenv = false,
-                        pipenv = false,
-                        anaconda_envs = false,
-                        anaconda_base = false,
-                        miniconda_envs = false,
-                        miniconda_base = false,
-                        pipx = false,
-                        cwd = false,
-                        file = false,
-                    },
-                },
-            })
-        end,
         keys = {
             { "<leader>v", "<cmd>VenvSelect<cr>" },
         },
+        opts = {},
     },
     {
         "neovim/nvim-lspconfig",

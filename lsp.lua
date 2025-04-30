@@ -1,3 +1,6 @@
+vim.diagnostic.config({
+    virtual_text = true,
+})
 local servers = {
     -- generic
     "taplo",
@@ -22,9 +25,7 @@ local servers = {
     "rust_analyzer",
 }
 
-for _, lsp in pairs(servers) do
-    vim.lsp.enable(lsp)
-end
+vim.lsp.enable(servers)
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
 vim.lsp.config("lua_ls", {
     on_init = function(client)
