@@ -20,12 +20,14 @@ local servers = {
 
     -- python
     "pyright",
+    -- "ruff",
 
     -- rust
     "rust_analyzer",
 }
 
 vim.lsp.enable(servers)
+
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#lua_ls
 vim.lsp.config("lua_ls", {
     on_init = function(client)
@@ -75,6 +77,14 @@ vim.lsp.config("rust_analyzer", {
         },
     },
 })
+vim.lsp.config("pyright", {
+    settings = {
+        pyright = {
+            disableOrganizeImports = true,
+        },
+    },
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
         local bmap = function(mode, km, ex)

@@ -3,21 +3,34 @@ return {
         "pteroctopus/faster.nvim",
     },
     {
-        "antosha417/nvim-lsp-file-operations",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-neo-tree/neo-tree.nvim",
-        },
+        "fnune/recall.nvim",
+        version = "*",
         config = function()
-            require("lsp-file-operations").setup()
+            local recall = require("recall")
+            recall.setup({})
+            vim.keymap.set("n", "<leader>mm", recall.toggle, { noremap = true, silent = true })
+            vim.keymap.set("n", "<leader>mc", recall.clear, { noremap = true, silent = true })
+            vim.keymap.set("n", "<leader>ml", ":Telescope recall<CR>", { noremap = true, silent = true })
         end,
     },
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "MunifTanjim/nui.nvim",
+        },
         lazy = false,
         config = function()
             vim.keymap.set("n", "<leader><tab>", ":Neotree toggle<CR>")
+            require("neo-tree").setup({
+                filesystem = {
+                    follow_current_file = {
+                        enabled = true,
+                    },
+                },
+            })
         end,
     },
     {
