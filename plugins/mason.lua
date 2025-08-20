@@ -27,7 +27,7 @@ return {
                 -- "svelte-language-server",
 
                 -- python
-                "pyright",
+                "basedpyright",
                 "ruff", -- formatter
 
                 -- rust

@@ -19,7 +19,7 @@ local servers = {
     -- "svelte",
 
     -- python
-    "pyright",
+    "basedpyright",
     -- "ruff",
 
     -- rust
@@ -77,9 +77,9 @@ vim.lsp.config("rust_analyzer", {
         },
     },
 })
-vim.lsp.config("pyright", {
+vim.lsp.config("basedpyright", {
     settings = {
-        pyright = {
+        basedpyright = {
             disableOrganizeImports = true,
         },
     },
