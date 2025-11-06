@@ -23,7 +23,7 @@ local servers = {
     -- "ruff",
 
     -- rust
-    "rust_analyzer",
+    -- "rust_analyzer",
 }
 
 vim.lsp.enable(servers)
