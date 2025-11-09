@@ -57,6 +57,9 @@ return {
                     preview = {
                         filesize_limit = 0.1, -- MB
                     },
+                    file_ignore_pattern = {
+                        "%.lock",
+                    },
                 },
                 pickers = {
                     live_grep = {
