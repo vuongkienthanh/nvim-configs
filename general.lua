@@ -1,6 +1,5 @@
 local set = vim.opt
 set.number = true
-set.relativenumber = true
 set.mouse = "a"
 set.ignorecase = true
 set.smartcase = true
